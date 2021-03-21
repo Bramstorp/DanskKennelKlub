@@ -2,13 +2,14 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
-
 import { HomeNavigator } from "./home.navigator";
+import { CalendarNavigator } from "./calendar.navigator";
 
 const Tab = createBottomTabNavigator();
 
 const TAB_ICON = {
   Homescreen: "md-home",
+  Calendar: "md-calendar",
 };
 
 const createScreenOptions = ({ route }) => {
@@ -30,5 +31,6 @@ export const AppNavigator = () => (
       }}
     >
       <Tab.Screen name="Homescreen" component={HomeNavigator} />
+      <Tab.Screen name="Calendar" component={CalendarNavigator} />
     </Tab.Navigator>
 );
