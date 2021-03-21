@@ -1,7 +1,9 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import { View, Text } from "react-native";
+
+
+import { HomeNavigator } from "./home.navigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -18,13 +20,6 @@ const createScreenOptions = ({ route }) => {
   };
 };
 
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
 
 export const AppNavigator = () => (
     <Tab.Navigator
@@ -34,6 +29,6 @@ export const AppNavigator = () => (
         inactiveTintColor: "gray",
       }}
     >
-      <Tab.Screen name="Homescreen" component={HomeScreen} />
+      <Tab.Screen name="Homescreen" component={HomeNavigator} />
     </Tab.Navigator>
 );
