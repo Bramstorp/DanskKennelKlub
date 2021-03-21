@@ -5,15 +5,9 @@ import {
 } from "@react-navigation/stack";
 import { View, Text } from "react-native";
 
-const CalendarStack = createStackNavigator();
+import { CalendarScreen } from "../../features/calendar/screens/calendar.screen";
 
-function Calendar() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Calendar!</Text>
-      </View>
-    );
-  }
+const CalendarStack = createStackNavigator();
 
 export const CalendarNavigator = ({ route, navigation }) => {
   return (
@@ -28,7 +22,7 @@ export const CalendarNavigator = ({ route, navigation }) => {
           header: () => null,
         }}
         name="Calendar"
-        component={Calendar}
+        component={CalendarScreen}
       />
     </CalendarStack.Navigator>
   );
