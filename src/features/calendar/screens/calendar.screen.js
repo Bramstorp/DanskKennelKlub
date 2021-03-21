@@ -1,98 +1,45 @@
-import React, {Component} from 'react';
-import {Alert, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {addDays, format} from 'date-fns';
+import React, {useEffect, useState} from 'react';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {Agenda} from 'react-native-calendars';
 
-export default class CalendarScreen extends Component {
-  constructor(props) {
-    super(props);
+export const CalendarScreen = () => {
+  const [items, setItems] = useState({});
 
-    this.state = {
-      items: {}
-    };
-  }
-
-  render() {
-    return (
-      <Agenda
-        testID={testIDs.agenda.CONTAINER}
-        items={this.state.items}
-        loadItemsForMonth={this.loadItems.bind(this)}
-        selected={'2017-05-16'}
-        renderItem={this.renderItem.bind(this)}
-        renderEmptyDate={this.renderEmptyDate.bind(this)}
-        rowHasChanged={this.rowHasChanged.bind(this)}
-      />
-    );
-  }
-
-  loadItems(day) {
-    setTimeout(() => {
-      for (let i = -15; i < 85; i++) {
-        const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-        const strTime = this.timeToString(time);
-        if (!this.state.items[strTime]) {
-          this.state.items[strTime] = [];
-          const numItems = Math.floor(Math.random() * 3 + 1);
-          for (let j = 0; j < numItems; j++) {
-            this.state.items[strTime].push({
-              name: 'Item for ' + strTime + ' #' + j,
-              height: Math.max(50, Math.floor(Math.random() * 150))
-            });
-          }
-        }
+  useEffect(() => {
+      const data = {
+        '2021-03-21': [{name: 'test 1', cookies: true}],
+        '2021-03-22': [{name: 'test 2', cookies: false}],
       }
-      const newItems = {};
-      Object.keys(this.state.items).forEach(key => {
-        newItems[key] = this.state.items[key];
-      });
-      this.setState({
-        items: newItems
-      });
-    }, 1000);
-  }
+      setItems(data);
+  }, []);
 
-  renderItem(item) {
+  const renderItem = (item) => {
     return (
-      <TouchableOpacity
-        testID={testIDs.agenda.ITEM}
-        style={[styles.item, {height: item.height}]}
-        onPress={() => Alert.alert(item.name)}
-      >
+      <View style={styles.itemContainer}>
         <Text>{item.name}</Text>
-      </TouchableOpacity>
-    );
-  }
-
-  renderEmptyDate() {
-    return (
-      <View style={styles.emptyDate}>
-        <Text>This is empty date!</Text>
+        <Text>{item.cookies ? `🍪` : `😋`}</Text>
       </View>
     );
-  }
+  };
 
-  rowHasChanged(r1, r2) {
-    return r1.name !== r2.name;
-  }
-
-  timeToString(time) {
-    const date = new Date(time);
-    return date.toISOString().split('T')[0];
-  }
-}
+  return (
+    <SafeAreaView style={styles.safe}>
+      <Agenda items={items} renderItem={renderItem} />
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
-  item: {
-    backgroundColor: 'white',
+  safe: {
     flex: 1,
-    borderRadius: 5,
-    padding: 10,
-    marginRight: 10,
-    marginTop: 17
   },
-  emptyDate: {
-    height: 15,
+  itemContainer: {
+    backgroundColor: 'white',
+    margin: 5,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
     flex: 1,
-    paddingTop: 30
-  }
+  },
 });
