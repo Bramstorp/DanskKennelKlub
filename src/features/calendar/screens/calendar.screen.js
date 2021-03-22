@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { SafeAreaView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Card, Avatar } from 'react-native-paper';
 import { Agenda } from 'react-native-calendars';
 
 import { CalendarContext } from "../../../services/calendar/calendar.context";
@@ -9,12 +10,21 @@ export const CalendarScreen = () => {
 
   const renderItem = (item) => {
     return (
-      <TouchableOpacity style={styles.itemContainer} onPress={() => console.log(item.name)}>
-        <View >
+      <TouchableOpacity style={{marginRight: 10, marginTop: 17}}>
+      <Card>
+        <Card.Content>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
             <Text>{item.name}</Text>
-            <Text>{item.cookies ? `🍪` : `😋`}</Text>
-        </View>
-      </TouchableOpacity>
+            <Avatar.Text label="J" />
+          </View>
+        </Card.Content>
+      </Card>
+    </TouchableOpacity>
     );
   };
 
