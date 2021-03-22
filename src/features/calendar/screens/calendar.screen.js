@@ -30,7 +30,15 @@ export const CalendarScreen = () => {
 
   const empty = () => {
     return (
-      <View style={styles.emptyDate}>
+      <View style={styles.emptydate}>
+        <Text>This is empty date!</Text>
+      </View>
+    );
+  }
+
+  const emptyData = () => {
+    return (
+      <View style={styles.emptydate}>
         <Text>This is empty date!</Text>
       </View>
     );
@@ -44,6 +52,7 @@ export const CalendarScreen = () => {
         pastScrollRange={5}
         futureScrollRange={5}
         renderEmptyDate={empty}
+        renderEmptyData={emptyData}
       />
     </SafeAreaView>
   );
@@ -54,6 +63,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   itemContainer: {
+    backgroundColor: 'white',
+    margin: 5,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+  },
+  emptydate: {
     backgroundColor: 'white',
     margin: 5,
     borderRadius: 15,
