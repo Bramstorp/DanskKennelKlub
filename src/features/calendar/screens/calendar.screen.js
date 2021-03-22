@@ -28,7 +28,7 @@ export const CalendarScreen = () => {
     );
   };
 
-  const empty = () => {
+  const emptyDate = () => {
     return (
       <View style={styles.emptydate}>
         <Text>This is empty date!</Text>
@@ -51,7 +51,7 @@ export const CalendarScreen = () => {
         renderItem={renderItem}
         pastScrollRange={5}
         futureScrollRange={5}
-        renderEmptyDate={empty}
+        renderEmptyDate={emptyDate}
         renderEmptyData={emptyData}
       />
     </SafeAreaView>
