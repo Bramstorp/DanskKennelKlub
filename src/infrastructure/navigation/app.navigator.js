@@ -5,6 +5,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { HomeNavigator } from "./home.navigator";
 import { CalendarNavigator } from "./calendar.navigator";
 
+import { CalendarContextProvider } from "../../services/calendar/calendar.context";
+
 const Tab = createBottomTabNavigator();
 
 const TAB_ICON = {
@@ -23,14 +25,16 @@ const createScreenOptions = ({ route }) => {
 
 
 export const AppNavigator = () => (
-    <Tab.Navigator
-      screenOptions={createScreenOptions}
-      tabBarOptions={{
-        activeTintColor: "tomato",
-        inactiveTintColor: "gray",
-      }}
-    >
-      <Tab.Screen name="Homescreen" component={HomeNavigator} />
-      <Tab.Screen name="Calendar" component={CalendarNavigator} />
-    </Tab.Navigator>
+    <CalendarContextProvider>
+      <Tab.Navigator
+        screenOptions={createScreenOptions}
+        tabBarOptions={{
+          activeTintColor: "tomato",
+          inactiveTintColor: "gray",
+        }}
+      >
+        <Tab.Screen name="Homescreen" component={HomeNavigator} />
+        <Tab.Screen name="Calendar" component={CalendarNavigator} />
+      </Tab.Navigator>
+    </CalendarContextProvider>
 );
