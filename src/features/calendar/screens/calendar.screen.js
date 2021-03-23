@@ -1,14 +1,12 @@
 import React, { useContext } from "react";
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-} from "react-native";
+import { TouchableOpacity } from "react-native";
+import { SafeArea } from "../../../components/utility/safe-area.component";
+import { Spacer } from "../../../components/spacer/spacer.component";
+import { EventCard, EmptyDate } from "./calendar-style";
 import { Agenda } from "react-native-calendars";
 
 import { CalendarContext } from "../../../services/calendar/calendar.context";
+import { Text } from "../../../components/typography/text.component";
 
 export const CalendarScreen = ({ navigation }) => {
   const { isLoading, date } = useContext(CalendarContext);
@@ -16,38 +14,45 @@ export const CalendarScreen = ({ navigation }) => {
   const renderItem = (item) => {
     return (
       <TouchableOpacity
-        style={styles.itemContainer}
         onPress={() =>
           navigation.navigate("CalendarDetail", {
             calendar: item,
           })
         }
       >
-        <View>
-          <Text>{item.name}</Text>
-        </View>
+        <EventCard>
+          <Text>
+            {item.starttime} - {item.endtime}
+          </Text>
+          <Spacer size="medium">
+            <Text>{item.name}</Text>
+          </Spacer>
+          <Spacer size="medium">
+            <Text>Person Navn</Text>
+          </Spacer>
+        </EventCard>
       </TouchableOpacity>
     );
   };
 
   const emptyDate = () => {
     return (
-      <View style={styles.emptydate}>
+      <EmptyDate>
         <Text>This is empty date!</Text>
-      </View>
+      </EmptyDate>
     );
   };
 
   const emptyData = () => {
     return (
-      <View style={styles.emptydate}>
+      <EmptyDate>
         <Text>This is empty date!</Text>
-      </View>
+      </EmptyDate>
     );
   };
 
   return (
-    <SafeAreaView style={styles.safe}>
+    <SafeArea>
       <Agenda
         items={date}
         renderItem={renderItem}
@@ -56,34 +61,6 @@ export const CalendarScreen = ({ navigation }) => {
         renderEmptyDate={emptyDate}
         renderEmptyData={emptyData}
       />
-    </SafeAreaView>
+    </SafeArea>
   );
 };
-
-const styles = StyleSheet.create({
-  safe: {
-    flex: 1,
-  },
-  itemContainer: {
-    backgroundColor: "white",
-    margin: 5,
-    borderRadius: 15,
-    justifyContent: "center",
-    alignItems: "center",
-    flex: 1,
-    height: 100,
-  },
-  emptydate: {
-    backgroundColor: "white",
-    margin: 5,
-    borderRadius: 15,
-    justifyContent: "center",
-    alignItems: "center",
-    flex: 1,
-  },
-  emptyDate: {
-    height: 15,
-    flex: 1,
-    paddingTop: 30,
-  },
-});

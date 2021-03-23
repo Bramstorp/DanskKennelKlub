@@ -1,8 +1,6 @@
 import React from "react";
 import { Text } from "react-native";
-
-import { SafeArea } from "../../../components/utility/safe-area.component";
-import { Test } from "./calendar-style";
+import { Test } from "../screens/calendar-style";
 
 export const CalendarDetailScreen = ({ route }) => {
   const { calendar } = route.params;
