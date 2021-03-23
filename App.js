@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { ThemeProvider } from "styled-components/native";
 
@@ -14,4 +14,4 @@ export default function App() {
       <ExpoStatusBar style="auto" />
     </>
   );
-};
+}
