@@ -22,13 +22,12 @@ export const CalendarContextProvider = ({ children }) => {
       });
   }, []);
 
-
   return (
     <CalendarContext.Provider
       value={{
         isLoading,
         error,
-        date
+        date,
       }}
     >
       {children}

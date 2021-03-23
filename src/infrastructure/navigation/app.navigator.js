@@ -23,18 +23,17 @@ const createScreenOptions = ({ route }) => {
   };
 };
 
-
 export const AppNavigator = () => (
-    <CalendarContextProvider>
-      <Tab.Navigator
-        screenOptions={createScreenOptions}
-        tabBarOptions={{
-          activeTintColor: "tomato",
-          inactiveTintColor: "gray",
-        }}
-      >
-        <Tab.Screen name="Homescreen" component={HomeNavigator} />
-        <Tab.Screen name="Calendar" component={CalendarNavigator} />
-      </Tab.Navigator>
-    </CalendarContextProvider>
+  <CalendarContextProvider>
+    <Tab.Navigator
+      screenOptions={createScreenOptions}
+      tabBarOptions={{
+        activeTintColor: "tomato",
+        inactiveTintColor: "gray",
+      }}
+    >
+      <Tab.Screen name="Homescreen" component={HomeNavigator} />
+      <Tab.Screen name="Calendar" component={CalendarNavigator} />
+    </Tab.Navigator>
+  </CalendarContextProvider>
 );
