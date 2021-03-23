@@ -9,13 +9,13 @@ import { AuthenticationContextProvider } from "./src/services/authentication/aut
 
 import * as firebase from "firebase";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCSTaSuyPoT6sOrVeX_usYxhbhWt4qEKHc",
-  authDomain: "meals-to-go-test.firebaseapp.com",
-  projectId: "meals-to-go-test",
-  storageBucket: "meals-to-go-test.appspot.com",
-  messagingSenderId: "678774396998",
-  appId: "1:678774396998:web:3fced6763f5473aa435247",
+var firebaseConfig = {
+  apiKey: "AIzaSyA6fdQrfoPFE7cVhF5F-Bm9Tg8opGFcdbU",
+  authDomain: "dansk-kennel-klub-prod.firebaseapp.com",
+  projectId: "dansk-kennel-klub-prod",
+  storageBucket: "dansk-kennel-klub-prod.appspot.com",
+  messagingSenderId: "1098750082639",
+  appId: "1:1098750082639:web:3fdfc0493814e2c519f43a"
 };
 
 if (!firebase.apps.length) {

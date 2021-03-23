@@ -23,7 +23,7 @@ export const AccountContainer = styled.View`
 `;
 
 export const AuthButton = styled(Button).attrs({
-  color: colors.brand.primary,
+  color: colors.brand.danger,
 })`
   padding: ${(props) => props.theme.space[2]};
 `;

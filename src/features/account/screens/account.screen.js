@@ -13,7 +13,7 @@ export const AccountScreen = ({ navigation }) => {
   return (
     <AccountBackground>
       <AccountCover />
-      <Title>Meals To Go</Title>
+      <Title>Dansk Kennel Klub</Title>
       <AccountContainer>
         <AuthButton
           icon="email"
