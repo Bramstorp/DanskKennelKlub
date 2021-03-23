@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Image, View } from "react-native";
 
 import { ActivityIndicator, Colors } from "react-native-paper";
 
@@ -11,6 +12,7 @@ import {
   ErrorContainer,
   Title,
 } from "../components/account.styles";
+
 import { Text } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
@@ -23,8 +25,10 @@ export const RegisterScreen = ({ navigation }) => {
 
   return (
     <AccountBackground>
-      <AccountCover />
-      <Title>Meals To Go</Title>
+      <View>
+        <Image source={require("../../../../assets/dkk-logo.png")} />
+      </View>
+      <Title>Dansk Kennel Klub</Title>
       <AccountContainer>
         <AuthInput
           label="E-mail"

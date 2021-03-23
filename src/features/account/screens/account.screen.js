@@ -1,4 +1,5 @@
 import React from "react";
+import { Image, View } from "react-native";
 
 import { Spacer } from "../../../components/spacer/spacer.component";
 import {
@@ -12,8 +13,12 @@ import {
 export const AccountScreen = ({ navigation }) => {
   return (
     <AccountBackground>
-      <AccountCover />
-      <Title>Dansk Kennel Klub</Title>
+      <View>
+        <Image source={require("../../../../assets/dkk-logo.png")} />
+      </View>
+      <Spacer size="large">
+        <Title>Dansk Kennel Klub</Title>
+      </Spacer>
       <AccountContainer>
         <AuthButton
           icon="email"

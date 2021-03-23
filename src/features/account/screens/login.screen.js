@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { ActivityIndicator, Colors } from "react-native-paper";
+import { Image, View } from "react-native";
 
 import {
   AccountBackground,
@@ -22,8 +23,10 @@ export const LoginScreen = ({ navigation }) => {
 
   return (
     <AccountBackground>
-      <AccountCover />
-      <Title>Meals To Go</Title>
+      <View>
+        <Image source={require("../../../../assets/dkk-logo.png")} />
+      </View>
+      <Title>Dansk Kennel Klub</Title>
       <AccountContainer>
         <AuthInput
           label="E-mail"
