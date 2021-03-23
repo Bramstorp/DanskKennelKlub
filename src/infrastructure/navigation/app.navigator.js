@@ -7,6 +7,7 @@ import { CalendarNavigator } from "./calendar.navigator";
 import { SettingsNavigator } from "./settings.navigator";
 
 import { CalendarContextProvider } from "../../services/calendar/calendar.context";
+import { EventsContextProvider } from "../../services/events/events.context";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,16 +28,18 @@ const createScreenOptions = ({ route }) => {
 
 export const AppNavigator = () => (
   <CalendarContextProvider>
-    <Tab.Navigator
-      screenOptions={createScreenOptions}
-      tabBarOptions={{
-        activeTintColor: "tomato",
-        inactiveTintColor: "gray",
-      }}
-    >
-      <Tab.Screen name="Homescreen" component={HomeNavigator} />
-      <Tab.Screen name="Calendar" component={CalendarNavigator} />
-      <Tab.Screen name="Account" component={SettingsNavigator} />
-    </Tab.Navigator>
+    <EventsContextProvider>
+      <Tab.Navigator
+        screenOptions={createScreenOptions}
+        tabBarOptions={{
+          activeTintColor: "tomato",
+          inactiveTintColor: "gray",
+        }}
+      >
+        <Tab.Screen name="Homescreen" component={HomeNavigator} />
+        <Tab.Screen name="Calendar" component={CalendarNavigator} />
+        <Tab.Screen name="Account" component={SettingsNavigator} />
+      </Tab.Navigator>
+    </EventsContextProvider>
   </CalendarContextProvider>
 );
