@@ -11,21 +11,21 @@ import { Text } from "../../../components/typography/text.component";
 export const CalendarScreen = ({ navigation }) => {
   const { isLoading, date } = useContext(CalendarContext);
 
-  const renderItem = (item) => {
+  const renderItem = (date) => {
     return (
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("CalendarDetail", {
-            calendar: item,
+            calendar: date,
           })
         }
       >
         <EventCard>
           <Text>
-            {item.starttime} - {item.endtime}
+            {date.starttime} - {date.endtime}
           </Text>
           <Spacer size="medium">
-            <Text>{item.name}</Text>
+            <Text>{date.name}</Text>
           </Spacer>
           <Spacer size="medium">
             <Text>Person Navn</Text>

@@ -24,12 +24,21 @@ export const CalendarContextProvider = ({ children }) => {
       });
   }, []);
 
+  const setEvent = (eventdate, id, name, user) => {
+    firebase.database().ref(eventdate).set({
+      eventid: id,
+      eventName: name,
+      userid: user,
+    });
+  };
+
   return (
     <CalendarContext.Provider
       value={{
         isLoading,
         error,
         date,
+        setEvent,
       }}
     >
       {children}
