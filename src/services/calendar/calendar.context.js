@@ -4,6 +4,8 @@ import { calendarRequest } from "./calendar.service";
 
 export const CalendarContext = createContext();
 
+import * as firebase from "firebase";
+
 export const CalendarContextProvider = ({ children }) => {
   const [date, setdate] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

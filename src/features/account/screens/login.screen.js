@@ -4,7 +4,6 @@ import { Image, View } from "react-native";
 
 import {
   AccountBackground,
-  AccountCover,
   AccountContainer,
   AuthButton,
   AuthInput,

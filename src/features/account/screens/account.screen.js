@@ -5,7 +5,6 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import {
   AccountBackground,
   AccountContainer,
-  AccountCover,
   AuthButton,
   Title,
 } from "../components/account.styles";

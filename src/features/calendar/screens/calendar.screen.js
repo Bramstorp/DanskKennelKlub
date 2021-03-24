@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { TouchableOpacity } from "react-native";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
-import { EventCard, EmptyDate } from "./calendar-style";
+import { EventCard, EmptyDate } from "../components/calendar-style";
 import { Agenda } from "react-native-calendars";
 
 import { CalendarContext } from "../../../services/calendar/calendar.context";
