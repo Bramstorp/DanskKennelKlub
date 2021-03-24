@@ -25,13 +25,36 @@ export const CalendarContextProvider = ({ children }) => {
   }, []);
 
   const setEvent = (dates, id, name, user) => {
+    firebase.database().ref(dates).update({
+      eventid: id,
+      eventName: name,
+      userid: user,
+    });
+  };
+
+  const writeNewPost = (dates, id, name, user) => {
+    // A post entry.
+    var postData = {
+      eventname: name,
+      uid: user,
+      dates: dates,
+      id: id,
+    };
+
+    var newPostKey = firebase.database().ref().child("dates").push().key;
+
+    var updates = {};
+    updates["/" + dates + "/" + newPostKey] = postData;
+
+    return firebase.database().ref().update(updates);
+  };
+
+  const test = (dates) => {
     firebase
       .database()
-      .ref(dates + name)
-      .set({
-        eventid: id,
-        eventName: name,
-        userid: user,
+      .ref(dates)
+      .on("value", (snapshot) => {
+        console.log(snapshot);
       });
   };
 
@@ -42,6 +65,8 @@ export const CalendarContextProvider = ({ children }) => {
         error,
         date,
         setEvent,
+        writeNewPost,
+        test,
       }}
     >
       {children}

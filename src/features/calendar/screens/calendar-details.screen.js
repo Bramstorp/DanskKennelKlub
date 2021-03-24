@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Text } from "react-native";
 import { DetaiContainer, DetailEventCard } from "../components/calendar-style";
 import { Button } from "react-native-paper";
@@ -11,10 +11,8 @@ import { AuthenticationContext } from "../../../services/authentication/authenti
 
 export const CalendarDetailScreen = ({ route }) => {
   const { calendar } = route.params;
-  const { setEvent } = useContext(CalendarContext);
+  const { setEvent, writeNewPost, test } = useContext(CalendarContext);
   const { user } = useContext(AuthenticationContext);
-
-  console.log(calendar);
 
   return (
     <SafeArea>
@@ -34,7 +32,7 @@ export const CalendarDetailScreen = ({ route }) => {
           mode="contained"
           color="red"
           onPress={() =>
-            setEvent(calendar.date, calendar.id, calendar.name, user.uid)
+            writeNewPost(calendar.date, calendar.id, calendar.name, user.uid)
           }
         >
           Press me
