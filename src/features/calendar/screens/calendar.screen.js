@@ -6,26 +6,30 @@ import { EventCard, EmptyDate } from "../components/calendar-style";
 import { Agenda } from "react-native-calendars";
 
 import { CalendarContext } from "../../../services/calendar/calendar.context";
+import { EventsContext } from "../../../services/events/events.context";
 import { Text } from "../../../components/typography/text.component";
 
 export const CalendarScreen = ({ navigation }) => {
   const { isLoading, date } = useContext(CalendarContext);
+  const { events } = useContext(EventsContext);
 
-  const renderItem = (date) => {
+  console.log(events);
+
+  const renderItem = (item) => {
     return (
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("CalendarDetail", {
-            calendar: date,
+            calendar: item,
           })
         }
       >
         <EventCard>
           <Text>
-            {date.starttime} - {date.endtime}
+            {item.starttime} - {item.endtime}
           </Text>
           <Spacer size="medium">
-            <Text>{date.name}</Text>
+            <Text>{item.name}</Text>
           </Spacer>
           <Spacer size="medium">
             <Text>Person Navn</Text>
