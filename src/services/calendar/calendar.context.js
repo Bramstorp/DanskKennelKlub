@@ -40,13 +40,7 @@ export const CalendarContextProvider = ({ children }) => {
       dates: dates,
       id: id,
     };
-
-    var newPostKey = firebase.database().ref().child("dates").push().key;
-
-    var updates = {};
-    updates["/" + dates + "/" + newPostKey] = postData;
-
-    return firebase.database().ref().update(updates);
+    firebase.database().ref().child(dates).push(postData);
   };
 
   const test = (dates) => {

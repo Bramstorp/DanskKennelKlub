@@ -35,7 +35,7 @@ export const CalendarDetailScreen = ({ route }) => {
             writeNewPost(calendar.date, calendar.id, calendar.name, user.uid)
           }
         >
-          Press me
+          Deltag Event
         </Button>
       </DetaiContainer>
     </SafeArea>

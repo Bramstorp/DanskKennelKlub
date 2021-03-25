@@ -13,8 +13,6 @@ export const CalendarScreen = ({ navigation }) => {
   const { isLoading, date } = useContext(CalendarContext);
   const { events } = useContext(EventsContext);
 
-  console.log(events);
-
   const renderItem = (item) => {
     return (
       <TouchableOpacity
