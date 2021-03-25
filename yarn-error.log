@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/local/bin/yarn
+  /usr/bin/node /usr/local/bin/yarnpkg add @react-native-community/datetimepicker@3.0.4
 
 PATH: 
   /home/mbr/anaconda3/condabin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
