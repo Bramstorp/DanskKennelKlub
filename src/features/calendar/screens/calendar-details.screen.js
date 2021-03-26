@@ -11,20 +11,20 @@ import { AuthenticationContext } from "../../../services/authentication/authenti
 
 export const CalendarDetailScreen = ({ route }) => {
   const { calendar } = route.params;
-  const { setEvent, writeNewPost, test } = useContext(CalendarContext);
+  const { setEvent } = useContext(CalendarContext);
   const { user } = useContext(AuthenticationContext);
 
   return (
     <SafeArea>
       <DetailEventCard>
         <Text>
-          {calendar.starttime} - {calendar.endtime}
+          {calendar.start} - {calendar.end}
         </Text>
         <Spacer size="medium">
-          <Text>{calendar.name}</Text>
+          <Text>{calendar.title}</Text>
         </Spacer>
         <Spacer size="medium">
-          <Text>Person Navn</Text>
+          <Text>{calendar.summary}</Text>
         </Spacer>
       </DetailEventCard>
       <DetaiContainer>
@@ -32,7 +32,12 @@ export const CalendarDetailScreen = ({ route }) => {
           mode="contained"
           color="red"
           onPress={() =>
-            writeNewPost(calendar.date, calendar.id, calendar.name, user.uid)
+            setEvent(
+              calendar.title,
+              calendar.start,
+              calendar.end,
+              calendar.summary
+            )
           }
         >
           Deltag Event

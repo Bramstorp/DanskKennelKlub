@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { HomeNavigator } from "./home.navigator";
 import { CalendarNavigator } from "./calendar.navigator";
 import { SettingsNavigator } from "./settings.navigator";
+import { EventsNavigator } from "./events.navigator";
 
 import { CalendarContextProvider } from "../../services/calendar/calendar.context";
 import { EventsContextProvider } from "../../services/events/events.context";
@@ -39,6 +40,7 @@ export const AppNavigator = () => (
         <Tab.Screen name="Homescreen" component={HomeNavigator} />
         <Tab.Screen name="Calendar" component={CalendarNavigator} />
         <Tab.Screen name="Account" component={SettingsNavigator} />
+        <Tab.Screen name="Events" component={EventsNavigator} />
       </Tab.Navigator>
     </EventsContextProvider>
   </CalendarContextProvider>

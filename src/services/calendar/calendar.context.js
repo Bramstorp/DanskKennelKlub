@@ -24,13 +24,12 @@ export const CalendarContextProvider = ({ children }) => {
       });
   }, []);
 
-  const setEvent = (title, summary, start, end, userid) => {
-    firebase.database().ref("events").update({
+  const setEvent = (title, start, end, summary) => {
+    firebase.database().ref("calendar/events/").push({
       title: title,
-      summary: summary,
       start: start,
       end: end,
-      userid: userid,
+      summary: summary,
     });
   };
 
