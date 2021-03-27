@@ -5,7 +5,6 @@ import { ActivityIndicator, Colors } from "react-native-paper";
 
 import {
   AccountBackground,
-  AccountCover,
   AccountContainer,
   AuthButton,
   AuthInput,
