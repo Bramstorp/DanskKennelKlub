@@ -24,20 +24,17 @@ export const CalendarContextProvider = ({ children }) => {
       });
   }, []);
 
-  const setEvent = (date, name, test) => {
-    let arrayTest = test;
-    const keyParam = date;
+  const setEvent = (date, name, events) => {
+    const dateKeyParam = date;
 
-    Object.entries(arrayTest[0]).forEach(([key]) => {
-      if (key === keyParam) {
-        arrayTest[0][key].push({ id: 4, name: date });
+    Object.entries(events[0]).forEach(([key]) => {
+      if (key === dateKeyParam) {
+        events[0][key].push({ id: 4, name: name });
       }
     });
 
-    JSON.parse(JSON.stringify(arrayTest));
-    console.log(arrayTest);
-
-    firebase.database().ref("calendar/events").update(arrayTest[0]);
+    JSON.parse(JSON.stringify(events));
+    firebase.database().ref("calendar/events").update(events[0]);
   };
 
   return (

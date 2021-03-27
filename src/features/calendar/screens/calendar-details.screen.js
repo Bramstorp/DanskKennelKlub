@@ -13,10 +13,9 @@ import * as firebase from "firebase";
 
 export const CalendarDetailScreen = ({ route }) => {
   const { calendar } = route.params;
-  const { setEvent } = useContext(CalendarContext);
   const { user } = useContext(AuthenticationContext);
 
-  const [test, setTest] = useState([]);
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     firebase
@@ -28,7 +27,7 @@ export const CalendarDetailScreen = ({ route }) => {
         snapshot.forEach((child) => {
           values.push(child.val());
         });
-        setTest(values);
+        setEvents(values);
       });
   }, []);
 
@@ -49,7 +48,7 @@ export const CalendarDetailScreen = ({ route }) => {
         <Button
           mode="contained"
           color="red"
-          onPress={() => setEvent(calendar.date, calendar.name, test)}
+          onPress={() => setEvents(calendar.date, calendar.name, events)}
         >
           Deltag Event
         </Button>
