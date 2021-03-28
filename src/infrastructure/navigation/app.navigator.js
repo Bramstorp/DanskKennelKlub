@@ -16,6 +16,7 @@ const TAB_ICON = {
   Homescreen: "md-home",
   Calendar: "md-calendar",
   Account: "md-person",
+  Events: "md-add",
 };
 
 const createScreenOptions = ({ route }) => {
