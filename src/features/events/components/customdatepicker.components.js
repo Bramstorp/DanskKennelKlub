@@ -1,24 +1,28 @@
 import React, { useState } from "react";
-import {
-  View,
-  Modal,
-  TouchableHighlight,
-  Text,
-  StyleSheet,
-} from "react-native";
-import { EventsTextStyle } from "./events.style";
+import { View, Modal, TouchableHighlight, Text } from "react-native";
+import { EventsTextStyle, CancelButton, DoneButton } from "./events.style";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 import moment from "moment";
 
 export const CustomDatePicker = (props) => {
-  const { textStyle } = props;
-  const [date, setDate] = useState(moment());
+  const { textStyle, defaultDate } = props;
+  const [date, setDate] = useState(moment(defaultDate));
   const [show, setShow] = useState(false);
 
   const onChange = (e, selectedDate) => {
     setDate(moment(selectedDate));
+  };
+
+  const onDonePress = () => {
+    props.onDateChange(defaultDate);
+    setShow(false);
+  };
+
+  const onCancelPress = () => {
+    setDate(moment(defaultDate));
+    setShow(false);
   };
 
   return (
@@ -64,24 +68,22 @@ export const CustomDatePicker = (props) => {
                       timeZoneOffsetInMinutes={0}
                       value={new Date(date)}
                       mode="date"
-                      minimumDate={
-                        new Date(
-                          moment().subtract(120, "years").format("YYYY-MM-DD")
-                        )
-                      }
-                      maximumDate={new Date(moment().format("YYYY-MM-DD"))}
                       onChange={onChange}
                       display={"spinner"}
                     />
                   </View>
-
-                  <TouchableHighlight
+                  <CancelButton
                     underlayColor={"transparent"}
-                    onPress={() => console.log("cancelled")}
-                    styles={[styles.btnText, styles.btnCancel]}
+                    onPress={() => onCancelPress()}
                   >
                     <Text>Cancel</Text>
-                  </TouchableHighlight>
+                  </CancelButton>
+                  <DoneButton
+                    underlayColor={"transparent"}
+                    onPress={() => onDonePress()}
+                  >
+                    <Text>Done</Text>
+                  </DoneButton>
                 </View>
               </TouchableHighlight>
             </TouchableHighlight>
@@ -94,22 +96,6 @@ export const CustomDatePicker = (props) => {
 
 CustomDatePicker.defaultProps = {
   textStyle: {},
+  defaultDate: moment(),
+  onDateChange: () => {},
 };
-
-const styles = StyleSheet.create({
-  btnText: {
-    position: "absolute",
-    top: 0,
-    height: 42,
-    paddingHorizontal: 20,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  btnCancel: {
-    left: 0,
-  },
-  btnDone: {
-    right: 0,
-  },
-});

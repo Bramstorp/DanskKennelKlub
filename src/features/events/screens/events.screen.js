@@ -18,6 +18,8 @@ import {
 
 import { CustomDatePicker } from "../components/customdatepicker.components";
 
+import moment from "moment";
+
 export const EventsScreen = ({ navigation }) => {
   const { setEvent } = useContext(CalendarContext);
   const { onRegister, isLoading } = useContext(AuthenticationContext);
@@ -47,6 +49,7 @@ export const EventsScreen = ({ navigation }) => {
               borderColor: "gray",
               borderWidth: 1,
             }}
+            defaultDate={moment(Date.now())}
           />
         </Spacer>
         <Spacer size="large">
