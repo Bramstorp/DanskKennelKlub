@@ -7,12 +7,13 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment";
 
 export const CustomDatePicker = (props) => {
-  const { textStyle, defaultDate } = props;
+  const { defaultDate } = props;
   const [date, setDate] = useState(moment(defaultDate));
   const [show, setShow] = useState(false);
 
   const onChange = (e, selectedDate) => {
     setDate(moment(selectedDate));
+    props.onChange(selectedDate);
   };
 
   const onDonePress = () => {

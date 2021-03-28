@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Image, View } from "react-native";
 import { Button, ActivityIndicator } from "react-native-paper";
 
@@ -19,12 +19,30 @@ import {
 import { CustomDatePicker } from "../components/customdatepicker.components";
 
 import moment from "moment";
+import * as firebase from "firebase";
 
 export const EventsScreen = ({ navigation }) => {
   const { setEvent } = useContext(CalendarContext);
   const { onRegister, isLoading } = useContext(AuthenticationContext);
 
   const [eventName, setEventName] = useState("");
+  const [name, setName] = useState("");
+  const [date, setDate] = useState(moment(Date.now()));
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    firebase
+      .database()
+      .ref("calendar")
+      .once("value")
+      .then((snapshot) => {
+        let values = [];
+        snapshot.forEach((child) => {
+          values.push(child.val());
+        });
+        setEvents(values);
+      });
+  }, []);
 
   return (
     <AccountBackground>
@@ -36,19 +54,20 @@ export const EventsScreen = ({ navigation }) => {
         <AuthInput
           label="Event Navn"
           value={eventName}
-          textContentType="emailAddress"
-          keyboardType="email-address"
           autoCapitalize="none"
           onChangeText={(u) => setEventName(u)}
         />
         <Spacer size="large">
+          <AuthInput
+            label="Træner Navn"
+            value={name}
+            autoCapitalize="none"
+            onChangeText={(u) => setName(u)}
+          />
+        </Spacer>
+        <Spacer size="large">
           <CustomDatePicker
-            textStyle={{
-              paddingVertical: 15,
-              paddingHorizontal: 10,
-              borderColor: "gray",
-              borderWidth: 1,
-            }}
+            onChange={(value) => setDate(moment(value))}
             defaultDate={moment(Date.now())}
           />
         </Spacer>
@@ -57,7 +76,7 @@ export const EventsScreen = ({ navigation }) => {
             <AuthButton
               icon="email"
               mode="contained"
-              onPress={() => setEvent()}
+              onPress={() => setEvent(date, name, eventName, events)}
             >
               Opret Event
             </AuthButton>
