@@ -10,7 +10,7 @@ import { EventsContext } from "../../../services/events/events.context";
 import { Text } from "../../../components/typography/text.component";
 
 export const CalendarScreen = ({ navigation }) => {
-  const { isLoading, date } = useContext(CalendarContext);
+  const { date } = useContext(CalendarContext);
   const { events } = useContext(EventsContext);
 
   const renderItem = (item) => {

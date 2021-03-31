@@ -22,8 +22,8 @@ import moment from "moment";
 import * as firebase from "firebase";
 
 export const EventsScreen = ({ navigation }) => {
-  const { setEvent } = useContext(CalendarContext);
-  const { onRegister, isLoading } = useContext(AuthenticationContext);
+  const { setEvent, isEventLoading } = useContext(CalendarContext);
+  const { isLoading } = useContext(AuthenticationContext);
 
   const [eventName, setEventName] = useState("");
   const [name, setName] = useState("");
@@ -72,7 +72,7 @@ export const EventsScreen = ({ navigation }) => {
           />
         </Spacer>
         <Spacer size="large">
-          {!isLoading ? (
+          {!isEventLoading ? (
             <AuthButton
               icon="email"
               mode="contained"
@@ -81,7 +81,7 @@ export const EventsScreen = ({ navigation }) => {
               Opret Event
             </AuthButton>
           ) : (
-            <ActivityIndicator animating={true} color={Colors.blue300} />
+            <ActivityIndicator animating={true} />
           )}
         </Spacer>
       </AccountContainer>

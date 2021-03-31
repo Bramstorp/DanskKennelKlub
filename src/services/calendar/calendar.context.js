@@ -11,6 +11,7 @@ import moment from "moment";
 export const CalendarContextProvider = ({ children }) => {
   const [date, setdate] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isEventLoading, setEventIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -39,13 +40,8 @@ export const CalendarContextProvider = ({ children }) => {
         if (key === dateKeyParam) {
           events[0][key].push({ name: name, eventName: eventName });
         } else {
-          events.push({
-            "2021-03-23": [
-              {
-                name: "test3",
-              },
-            ],
-          });
+          const data = { [dateFormat]: [{ name: name, eventName: eventName }] };
+          Object.assign(events[0], data);
         }
       });
     }
