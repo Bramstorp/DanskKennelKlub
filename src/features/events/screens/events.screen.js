@@ -23,7 +23,6 @@ import * as firebase from "firebase";
 
 export const EventsScreen = ({ navigation }) => {
   const { setEvent, isEventLoading } = useContext(CalendarContext);
-  const { isLoading } = useContext(AuthenticationContext);
 
   const [eventName, setEventName] = useState("");
   const [name, setName] = useState("");

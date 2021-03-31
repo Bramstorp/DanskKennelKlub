@@ -28,6 +28,7 @@ export const CalendarContextProvider = ({ children }) => {
   }, []);
 
   const setEvent = (date, name, eventName, events) => {
+    setEventIsLoading(true);
     const dateFormat = date.format(moment.HTML5_FMT.DATE);
     const dateKeyParam = dateFormat;
 
@@ -45,7 +46,13 @@ export const CalendarContextProvider = ({ children }) => {
         }
       });
     }
-    firebase.database().ref("calendar/events").update(events[0]);
+    firebase
+      .database()
+      .ref("calendar/events")
+      .update(events[0])
+      .then(function () {
+        setEventIsLoading(false);
+      });
   };
 
   return (
@@ -55,6 +62,7 @@ export const CalendarContextProvider = ({ children }) => {
         error,
         date,
         setEvent,
+        isEventLoading,
       }}
     >
       {children}
