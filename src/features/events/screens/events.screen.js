@@ -14,8 +14,11 @@ import {
 } from "../../account/components/account.styles";
 
 import { CustomDatePicker } from "../components/customdatepicker.components";
+import { CustomTimePicker } from "../components/customtimepicker.components";
 
 import moment from "moment";
+import "moment/locale/da";
+
 import * as firebase from "firebase";
 
 export const EventsScreen = ({ navigation }) => {
@@ -24,6 +27,7 @@ export const EventsScreen = ({ navigation }) => {
   const [eventName, setEventName] = useState("");
   const [name, setName] = useState("");
   const [date, setDate] = useState(moment(Date.now()));
+  const [time, setTime] = useState(moment(Date.now()));
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -68,9 +72,9 @@ export const EventsScreen = ({ navigation }) => {
           />
         </Spacer>
         <Spacer size="large">
-          <CustomDatePicker
-            onChange={(value) => setDate(moment(value))}
-            defaultDate={moment(Date.now())}
+          <CustomTimePicker
+            onChange={(value) => setTime(moment(value))}
+            defaultDate={moment(Date.now()).format()}
           />
         </Spacer>
         <Spacer size="large">

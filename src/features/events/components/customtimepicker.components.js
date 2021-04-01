@@ -15,14 +15,15 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 import moment from "moment";
+import "moment/locale/da";
 
-export const CustomDatePicker = (props) => {
+export const CustomTimePicker = (props) => {
   const { defaultDate } = props;
-  const [date, setDate] = useState(moment(defaultDate));
+  const [time, setTime] = useState(defaultDate);
   const [show, setShow] = useState(false);
 
   const onChange = (e, selectedDate) => {
-    setDate(moment(selectedDate));
+    setTime(selectedDate);
     props.onChange(selectedDate);
   };
 
@@ -32,14 +33,14 @@ export const CustomDatePicker = (props) => {
   };
 
   const onCancelPress = () => {
-    setDate(moment(defaultDate));
+    setTime(defaultDate);
     setShow(false);
   };
 
   return (
     <TouchableHighlight activeOpacity={1} onPress={() => setShow(true)}>
       <View>
-        <EventsTextStyle>{date.format("MMMM DD YYYY")}</EventsTextStyle>
+        <EventsTextStyle>{moment(time).format("H:mm:ss")}</EventsTextStyle>
         <Modal
           transparent={true}
           animationType="slide"
@@ -58,8 +59,8 @@ export const CustomDatePicker = (props) => {
                   <DateTimeView>
                     <DateTimePicker
                       timeZoneOffsetInMinutes={0}
-                      value={new Date(date)}
-                      mode="date"
+                      value={new Date(time)}
+                      mode="time"
                       onChange={onChange}
                       display={"spinner"}
                     />
@@ -86,8 +87,8 @@ export const CustomDatePicker = (props) => {
   );
 };
 
-CustomDatePicker.defaultProps = {
+CustomTimePicker.defaultProps = {
   textStyle: {},
-  defaultDate: moment(),
+  defaultDate: {},
   onDateChange: () => {},
 };
