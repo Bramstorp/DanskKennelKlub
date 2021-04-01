@@ -22,8 +22,11 @@ export const CustomTimePicker = (props) => {
   const [time, setTime] = useState(moment(defaultDate));
   const [show, setShow] = useState(false);
 
+  console.log(new Date(time));
+  console.log(new Date(time.format("DD MMMM YYYY hh:mm UTC")));
+
   const onChange = (e, selectedDate) => {
-    setTime(selectedDate);
+    setTime(moment(selectedDate));
     props.onChange(selectedDate);
   };
 
@@ -40,7 +43,7 @@ export const CustomTimePicker = (props) => {
   return (
     <TouchableHighlight activeOpacity={1} onPress={() => setShow(true)}>
       <View>
-        <EventsTextStyle>{moment(time).format("H:mm:ss")}</EventsTextStyle>
+        <EventsTextStyle>{time.format("hh:mm")}</EventsTextStyle>
         <Modal
           transparent={true}
           animationType="slide"
@@ -59,7 +62,7 @@ export const CustomTimePicker = (props) => {
                   <DateTimeView>
                     <DateTimePicker
                       timeZoneOffsetInMinutes={0}
-                      value={new Date(time)}
+                      value={new Date(time.format("DD MMMM YYYY hh:mm UTC"))}
                       mode="time"
                       onChange={onChange}
                       display={"spinner"}
