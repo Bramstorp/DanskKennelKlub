@@ -19,13 +19,12 @@ import "moment/locale/da";
 
 export const CustomTimePicker = (props) => {
   const { defaultDate } = props;
-  const [time, setTime] = useState(defaultDate);
+  const [time, setTime] = useState(moment(defaultDate));
   const [show, setShow] = useState(false);
 
   const onChange = (e, selectedDate) => {
-    console.log(moment(selectedDate));
-    //setTime(selectedDate);
-    //props.onChange(selectedDate);
+    setTime(selectedDate);
+    props.onChange(selectedDate);
   };
 
   const onDonePress = () => {
@@ -34,7 +33,7 @@ export const CustomTimePicker = (props) => {
   };
 
   const onCancelPress = () => {
-    setTime(defaultDate);
+    setTime(moment(defaultDate));
     setShow(false);
   };
 
@@ -60,9 +59,7 @@ export const CustomTimePicker = (props) => {
                   <DateTimeView>
                     <DateTimePicker
                       timeZoneOffsetInMinutes={0}
-                      value={new Date(
-                        moment(time).format("DD MMMM YYYY HH:MM UTC")
-                      ).toISOString()}
+                      value={new Date(time)}
                       mode="time"
                       onChange={onChange}
                       display={"spinner"}

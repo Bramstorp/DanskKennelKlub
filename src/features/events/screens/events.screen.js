@@ -74,7 +74,9 @@ export const EventsScreen = ({ navigation }) => {
         <Spacer size="large">
           <CustomTimePicker
             onChange={(value) => setTime(moment(value))}
-            defaultDate={moment(Date.now()).format()}
+            defaultDate={new Date(
+              moment(Date.now()).format("DD MMMM YYYY HH:MM UTC")
+            ).toISOString()}
           />
         </Spacer>
         <Spacer size="large">
