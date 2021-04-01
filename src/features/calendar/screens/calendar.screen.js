@@ -1,17 +1,30 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { EventCard, EmptyDate } from "../components/calendar-style";
 import { Agenda } from "react-native-calendars";
-
-import { CalendarContext } from "../../../services/calendar/calendar.context";
-import { EventsContext } from "../../../services/events/events.context";
 import { Text } from "../../../components/typography/text.component";
 
+import * as firebase from "firebase";
+
 export const CalendarScreen = ({ navigation }) => {
-  const { date } = useContext(CalendarContext);
-  const { events } = useContext(EventsContext);
+
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    firebase
+      .database()
+      .ref("calendar")
+      .once("value")
+      .then((snapshot) => {
+        let values = [];
+        snapshot.forEach((child) => {
+          values.push(child.val());
+        });
+        setEvents(values);
+      });
+  }, []);
 
   const renderItem = (item) => {
     return (
@@ -56,7 +69,7 @@ export const CalendarScreen = ({ navigation }) => {
   return (
     <SafeArea>
       <Agenda
-        items={date}
+        items={events[0]}
         renderItem={renderItem}
         pastScrollRange={5}
         futureScrollRange={5}
