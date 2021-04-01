@@ -68,6 +68,12 @@ export const EventsScreen = ({ navigation }) => {
           />
         </Spacer>
         <Spacer size="large">
+          <CustomDatePicker
+            onChange={(value) => setDate(moment(value))}
+            defaultDate={moment(Date.now())}
+          />
+        </Spacer>
+        <Spacer size="large">
           {!isEventLoading ? (
             <AuthButton
               icon="email"

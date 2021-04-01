@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import { View, Modal, TouchableHighlight, Text } from "react-native";
-import { EventsTextStyle, CancelButton, DoneButton } from "./events.style";
+
+import {
+  ModalView,
+  SafeView,
+  EventsTextStyle,
+  CancelButton,
+  DoneButton,
+  ModalBorder,
+  ShowModal,
+  DateTimeView,
+} from "./customdatepicker.style";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 
@@ -37,34 +47,18 @@ export const CustomDatePicker = (props) => {
           supportedOrientations={["portrait"]}
           onRequestClose={() => setShow(false)}
         >
-          <View style={{ flex: 1 }}>
-            <TouchableHighlight
-              style={{
-                flex: 1,
-                alignItems: "flex-end",
-                flexDirection: "row",
-              }}
+          <SafeView>
+            <ShowModal
               activeOpacity={1}
               visible={show}
               onPress={() => setShow(false)}
             >
-              <TouchableHighlight
+              <ModalBorder
                 underlayColor={"#FFFFFF"}
-                style={{
-                  flex: 1,
-                  borderTopColor: "#E9E9E9",
-                  borderTopWidth: 1,
-                }}
                 onPress={() => console.log("datepricker clicked")}
               >
-                <View
-                  style={{
-                    backgroundColor: "#FFFFFF",
-                    height: 256,
-                    overflow: "hidden",
-                  }}
-                >
-                  <View style={{ marginTop: 20 }}>
+                <ModalView>
+                  <DateTimeView>
                     <DateTimePicker
                       timeZoneOffsetInMinutes={0}
                       value={new Date(date)}
@@ -72,7 +66,7 @@ export const CustomDatePicker = (props) => {
                       onChange={onChange}
                       display={"spinner"}
                     />
-                  </View>
+                  </DateTimeView>
                   <CancelButton
                     underlayColor={"transparent"}
                     onPress={() => onCancelPress()}
@@ -85,10 +79,10 @@ export const CustomDatePicker = (props) => {
                   >
                     <Text>Done</Text>
                   </DoneButton>
-                </View>
-              </TouchableHighlight>
-            </TouchableHighlight>
-          </View>
+                </ModalView>
+              </ModalBorder>
+            </ShowModal>
+          </SafeView>
         </Modal>
       </View>
     </TouchableHighlight>
