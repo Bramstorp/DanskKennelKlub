@@ -14,7 +14,7 @@ import {
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-import moment from "moment";
+import moment from "moment-timezone";
 import "moment/locale/da";
 
 export const CustomTimePicker = (props) => {
@@ -23,8 +23,9 @@ export const CustomTimePicker = (props) => {
   const [show, setShow] = useState(false);
 
   const onChange = (e, selectedDate) => {
-    setTime(selectedDate);
-    props.onChange(selectedDate);
+    console.log(moment(selectedDate));
+    //setTime(selectedDate);
+    //props.onChange(selectedDate);
   };
 
   const onDonePress = () => {
@@ -59,7 +60,9 @@ export const CustomTimePicker = (props) => {
                   <DateTimeView>
                     <DateTimePicker
                       timeZoneOffsetInMinutes={0}
-                      value={new Date(time)}
+                      value={new Date(
+                        moment(time).format("DD MMMM YYYY HH:MM UTC")
+                      ).toISOString()}
                       mode="time"
                       onChange={onChange}
                       display={"spinner"}
