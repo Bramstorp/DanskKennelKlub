@@ -1,68 +1,34 @@
 import React, { useState, useEffect, createContext } from "react";
 
-import { calendarRequest } from "./calendar.service";
+import * as firebase from "firebase";
 
 export const CalendarContext = createContext();
 
-import * as firebase from "firebase";
-
-import moment from "moment";
-
 export const CalendarContextProvider = ({ children }) => {
-  const [date, setdate] = useState([]);
+  const [date, setDate] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isEventLoading, setEventIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
-    calendarRequest()
-      .then((results) => {
-        setIsLoading(false);
-        setdate(results);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        setError(err);
-      });
-  }, []);
-
-  const setEvent = (date, name, eventName, events) => {
-    setEventIsLoading(true);
-    const dateFormat = date.format(moment.HTML5_FMT.DATE);
-    const dateKeyParam = dateFormat;
-
-    if (events.length === 0) {
-      events.push({
-        [dateFormat]: [{ name: name, eventName: eventName }],
-      });
-    } else {
-      Object.entries(events[0]).forEach(([key]) => {
-        if (key === dateKeyParam) {
-          events[0][key].push({ name: name, eventName: eventName });
-        } else {
-          const data = { [dateFormat]: [{ name: name, eventName: eventName }] };
-          Object.assign(events[0], data);
-        }
-      });
-    }
     firebase
       .database()
-      .ref("calendar/events")
-      .update(events[0])
-      .then(function () {
-        setEventIsLoading(false);
+      .ref("calendar")
+      .once("value")
+      .then((snapshot) => {
+        let values = [];
+        snapshot.forEach((child) => {
+          values.push(child.val());
+        });
+        setDate(values);
+        setIsLoading(false);
       });
-  };
+  }, []);
 
   return (
     <CalendarContext.Provider
       value={{
         isLoading,
-        error,
         date,
-        setEvent,
-        isEventLoading,
       }}
     >
       {children}

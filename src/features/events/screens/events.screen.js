@@ -1,12 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Image, View } from "react-native";
-import { Button, ActivityIndicator } from "react-native-paper";
-
-import { SafeArea } from "../../../components/utility/safe-area.component";
+import { ActivityIndicator } from "react-native-paper";
 import { Spacer } from "../../../components/spacer/spacer.component";
 
-import { CalendarContext } from "../../../services/calendar/calendar.context";
-import { AuthenticationContext } from "../../../services/authentication/authentication.context.js";
+import { EventsContext } from "../../../services/events/events.context";
 
 import {
   AccountBackground,
@@ -22,7 +19,7 @@ import moment from "moment";
 import * as firebase from "firebase";
 
 export const EventsScreen = ({ navigation }) => {
-  const { setEvent, isEventLoading } = useContext(CalendarContext);
+  const { setEvent, isEventLoading } = useContext(EventsContext);
 
   const [eventName, setEventName] = useState("");
   const [name, setName] = useState("");
