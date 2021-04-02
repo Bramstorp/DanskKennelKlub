@@ -17,7 +17,6 @@ import { CustomDatePicker } from "../components/customdatepicker.components";
 import { CustomTimePicker } from "../components/customtimepicker.components";
 
 import moment from "moment";
-import "moment/locale/da";
 
 import * as firebase from "firebase";
 

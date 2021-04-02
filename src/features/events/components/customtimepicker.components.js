@@ -14,8 +14,6 @@ import {
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-import moment from "moment-timezone";
-import "moment/locale/da";
 
 export const CustomTimePicker = (props) => {
   const [time, setTime] = useState(new Date(1598051730000));
