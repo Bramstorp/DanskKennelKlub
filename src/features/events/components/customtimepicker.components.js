@@ -18,29 +18,29 @@ import moment from "moment-timezone";
 import "moment/locale/da";
 
 export const CustomTimePicker = (props) => {
-  const { defaultDate } = props;
-  const [time, setTime] = useState(moment(defaultDate));
+  const [time, setTime] = useState(new Date(1598051730000));
   const [show, setShow] = useState(false);
 
+  console.log(time);
+
   const onChange = (e, selectedDate) => {
-    setTime(moment(selectedDate));
-    props.onChange(selectedDate);
+    console.log(selectedDate);
+    setTime(selectedDate);
   };
 
   const onDonePress = () => {
-    props.onDateChange(defaultDate);
     setShow(false);
   };
 
   const onCancelPress = () => {
-    setTime(moment(defaultDate));
+    setTime(new Date(1598051730000));
     setShow(false);
   };
 
   return (
     <TouchableHighlight activeOpacity={1} onPress={() => setShow(true)}>
       <View>
-        <EventsTextStyle>{time.format("hh:mm")}</EventsTextStyle>
+        <EventsTextStyle>{time.toUTCString()}</EventsTextStyle>
         <Modal
           transparent={true}
           animationType="slide"
@@ -59,7 +59,7 @@ export const CustomTimePicker = (props) => {
                   <DateTimeView>
                     <DateTimePicker
                       timeZoneOffsetInMinutes={0}
-                      value={new Date(time.format("DD MMMM YYYY hh:mm UTC"))}
+                      value={time}
                       mode="time"
                       onChange={onChange}
                       display={"spinner"}
