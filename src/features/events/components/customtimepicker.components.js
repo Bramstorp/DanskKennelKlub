@@ -22,9 +22,6 @@ export const CustomTimePicker = (props) => {
   const [time, setTime] = useState(moment(defaultDate));
   const [show, setShow] = useState(false);
 
-  console.log(new Date(time));
-  console.log(new Date(time.format("DD MMMM YYYY hh:mm UTC")));
-
   const onChange = (e, selectedDate) => {
     setTime(moment(selectedDate));
     props.onChange(selectedDate);
