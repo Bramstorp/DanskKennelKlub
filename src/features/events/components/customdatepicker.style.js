@@ -29,10 +29,14 @@ export const SafeView = styled.View`
   flex: 1;
 `;
 
-export const EventsTextStyle = styled(Text).attrs({
-  color: colors.brand.danger,
-})`
+export const EventsTextStyle = styled(Text)`
   padding: ${(props) => props.theme.space[1]};
+  padding: 20px;
+  font-size: 16px;
+  color: #000000;
+  background-color: #e7e7e7;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 `;
 
 export const CancelButton = styled(TouchableHighlight)`
