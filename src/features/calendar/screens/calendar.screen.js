@@ -1,15 +1,34 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
+import { ActivityIndicator, Colors } from "react-native-paper";
+
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { EventCard, EmptyDate } from "../components/calendar-style";
 import { Agenda } from "react-native-calendars";
 import { Text } from "../../../components/typography/text.component";
 
-import { CalendarContext } from "../../../services/calendar/calendar.context";
+import * as firebase from "firebase";
 
 export const CalendarScreen = ({ navigation }) => {
-  const { date } = useContext(CalendarContext);
+  const [date, setDate] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    firebase
+      .database()
+      .ref("calendar")
+      .once("value")
+      .then((snapshot) => {
+        let values = [];
+        snapshot.forEach((child) => {
+          values.push(child.val());
+        });
+        setDate(values);
+        setIsLoading(false);
+      });
+  }, []);
 
   const renderItem = (item) => {
     return (
@@ -53,14 +72,18 @@ export const CalendarScreen = ({ navigation }) => {
 
   return (
     <SafeArea>
-      <Agenda
-        items={date[0]}
-        renderItem={renderItem}
-        pastScrollRange={5}
-        futureScrollRange={5}
-        renderEmptyDate={emptyDate}
-        renderEmptyData={emptyData}
-      />
+      {!isLoading ? (
+        <Agenda
+          items={date[0]}
+          renderItem={renderItem}
+          pastScrollRange={5}
+          futureScrollRange={5}
+          renderEmptyDate={emptyDate}
+          renderEmptyData={emptyData}
+        />
+      ) : (
+        <ActivityIndicator animating={true} color={Colors.blue300} />
+      )}
     </SafeArea>
   );
 };

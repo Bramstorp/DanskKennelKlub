@@ -21,13 +21,12 @@ import moment from "moment";
 import * as firebase from "firebase";
 
 export const EventsScreen = ({ navigation }) => {
-  const { setEvent, isEventLoading } = useContext(EventsContext);
-
   const [eventName, setEventName] = useState("");
   const [name, setName] = useState("");
   const [date, setDate] = useState(moment(Date.now()));
   const [time, setTime] = useState(moment(Date.now()));
   const [events, setEvents] = useState([]);
+  const [isEventLoading, setEventIsLoading] = useState(false);
 
   useEffect(() => {
     firebase
@@ -42,6 +41,34 @@ export const EventsScreen = ({ navigation }) => {
         setEvents(values);
       });
   }, []);
+
+  const setEvent = (date, name, eventName, events) => {
+    setEventIsLoading(true);
+    const dateFormat = date.format(moment.HTML5_FMT.DATE);
+    const dateKeyParam = dateFormat;
+
+    if (events.length === 0) {
+      events.push({
+        [dateFormat]: [{ name: name, eventName: eventName }],
+      });
+    } else {
+      Object.entries(events[0]).forEach(([key]) => {
+        if (key === dateKeyParam) {
+          events[0][key].push({ name: name, eventName: eventName });
+        } else {
+          const data = { [dateFormat]: [{ name: name, eventName: eventName }] };
+          Object.assign(events[0], data);
+        }
+      });
+    }
+    firebase
+      .database()
+      .ref("calendar/events")
+      .update(events[0])
+      .then(function () {
+        setEventIsLoading(false);
+      });
+  };
 
   return (
     <AccountBackground>

@@ -15,14 +15,11 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 
-export const CustomTimePicker = (props) => {
+export const CustomTimePicker = () => {
   const [time, setTime] = useState(new Date(1598051730000));
   const [show, setShow] = useState(false);
 
-  console.log(time);
-
   const onChange = (e, selectedDate) => {
-    console.log(selectedDate);
     setTime(selectedDate);
   };
 
