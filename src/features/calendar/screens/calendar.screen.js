@@ -7,6 +7,7 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import { EventCard, EmptyDate } from "../components/calendar-style";
 import { Agenda } from "react-native-calendars";
 import { Text } from "../../../components/typography/text.component";
+import { useFocusEffect } from "@react-navigation/native";
 
 import * as firebase from "firebase";
 
@@ -14,8 +15,7 @@ export const CalendarScreen = ({ navigation }) => {
   const [date, setDate] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    setIsLoading(true);
+  const FetchCalendarData = () => {
     firebase
       .database()
       .ref("calendar")
@@ -26,9 +26,9 @@ export const CalendarScreen = ({ navigation }) => {
           values.push(child.val());
         });
         setDate(values);
-        setIsLoading(false);
       });
-  }, []);
+  };
+  useFocusEffect(FetchCalendarData);
 
   const renderItem = (item) => {
     return (
@@ -47,7 +47,7 @@ export const CalendarScreen = ({ navigation }) => {
             <Text>{item.name}</Text>
           </Spacer>
           <Spacer size="medium">
-            <Text>Person Navn</Text>
+            <Text>{item.name}</Text>
           </Spacer>
         </EventCard>
       </TouchableOpacity>

@@ -24,7 +24,7 @@ export const EventsScreen = ({ navigation }) => {
   const [eventName, setEventName] = useState("");
   const [name, setName] = useState("");
   const [date, setDate] = useState(moment(Date.now()));
-  const [time, setTime] = useState(moment(Date.now()));
+  const [time, setTime] = useState(Date.now());
 
   return (
     <AccountBackground>
@@ -54,17 +54,14 @@ export const EventsScreen = ({ navigation }) => {
           />
         </Spacer>
         <Spacer size="large">
-          <CustomTimePicker
-            onChange={(value) => setTime(moment(value))}
-            defaultDate={new Date(time.format("DD MMMM YYYY hh:mm UTC"))}
-          />
+          <CustomTimePicker onChange={(value) => setTime(value)} />
         </Spacer>
         <Spacer size="large">
           {!isEventLoading ? (
             <AuthButton
               icon="email"
               mode="contained"
-              onPress={() => setEvent(date, name, eventName)}
+              onPress={() => setEvent(date, name, eventName, time)}
             >
               Opret Event
             </AuthButton>

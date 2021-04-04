@@ -14,13 +14,13 @@ import {
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-
-export const CustomTimePicker = () => {
+export const CustomTimePicker = (props) => {
   const [time, setTime] = useState(new Date(1598051730000));
   const [show, setShow] = useState(false);
 
   const onChange = (e, selectedDate) => {
     setTime(selectedDate);
+    props.onChange(selectedDate);
   };
 
   const onDonePress = () => {
@@ -35,7 +35,9 @@ export const CustomTimePicker = () => {
   return (
     <TouchableHighlight activeOpacity={1} onPress={() => setShow(true)}>
       <View>
-        <EventsTextStyle>{time.toUTCString()}</EventsTextStyle>
+        <EventsTextStyle>
+          {time.getUTCHours()}:{time.getMinutes()}
+        </EventsTextStyle>
         <Modal
           transparent={true}
           animationType="slide"

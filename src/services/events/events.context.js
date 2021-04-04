@@ -1,12 +1,10 @@
 import React, { useState, useEffect, createContext } from "react";
 
-import { eventsRequest } from "./events.service";
-
-export const EventsContext = createContext();
-
 import * as firebase from "firebase";
 
 import moment from "moment";
+
+export const EventsContext = createContext();
 
 export const EventsContextProvider = ({ children }) => {
   const [isEventLoading, setEventIsLoading] = useState(false);
@@ -26,21 +24,31 @@ export const EventsContextProvider = ({ children }) => {
       });
   }, []);
 
-  const setEvent = (date, name, eventName) => {
+  const setEvent = (date, name, eventName, starttime) => {
     setEventIsLoading(true);
     const dateFormat = date.format(moment.HTML5_FMT.DATE);
     const dateKeyParam = dateFormat;
 
+    const start = `${starttime.getUTCHours()}:${starttime.getMinutes()}`;
+
     if (events.length === 0) {
       events.push({
-        [dateFormat]: [{ name: name, eventName: eventName }],
+        [dateFormat]: [{ name: name, eventName: eventName, starttime: start }],
       });
     } else {
       Object.entries(events[0]).forEach(([key]) => {
         if (key === dateKeyParam) {
-          events[0][key].push({ name: name, eventName: eventName });
+          events[0][key].push({
+            name: name,
+            eventName: eventName,
+            starttime: start,
+          });
         } else {
-          const data = { [dateFormat]: [{ name: name, eventName: eventName }] };
+          const data = {
+            [dateFormat]: [
+              { name: name, eventName: eventName, starttime: start },
+            ],
+          };
           Object.assign(events[0], data);
         }
       });
