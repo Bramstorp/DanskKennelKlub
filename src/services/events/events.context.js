@@ -33,7 +33,14 @@ export const EventsContextProvider = ({ children }) => {
 
     if (events.length === 0) {
       events.push({
-        [dateFormat]: [{ name: name, eventName: eventName, starttime: start }],
+        [dateFormat]: [
+          {
+            name: name,
+            eventName: eventName,
+            starttime: start,
+            date: dateFormat,
+          },
+        ],
       });
     } else {
       Object.entries(events[0]).forEach(([key]) => {
@@ -42,11 +49,17 @@ export const EventsContextProvider = ({ children }) => {
             name: name,
             eventName: eventName,
             starttime: start,
+            date: dateFormat,
           });
         } else {
           const data = {
             [dateFormat]: [
-              { name: name, eventName: eventName, starttime: start },
+              {
+                name: name,
+                eventName: eventName,
+                starttime: start,
+                date: dateFormat,
+              },
             ],
           };
           Object.assign(events[0], data);
@@ -62,11 +75,21 @@ export const EventsContextProvider = ({ children }) => {
       });
   };
 
+  const joinEvents = (user, calendar) => {
+    console.log(user.email);
+    console.log(calendar.date);
+    firebase
+      .database()
+      .ref("calendar/events/" + calendar.date)
+      .update("test");
+  };
+
   return (
     <EventsContext.Provider
       value={{
         setEvent,
         isEventLoading,
+        joinEvents,
       }}
     >
       {children}

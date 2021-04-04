@@ -47,7 +47,7 @@ export const CalendarScreen = ({ navigation }) => {
             <Text>{item.name}</Text>
           </Spacer>
           <Spacer size="medium">
-            <Text>{item.name}</Text>
+            <Text>{item.eventName}</Text>
           </Spacer>
         </EventCard>
       </TouchableOpacity>

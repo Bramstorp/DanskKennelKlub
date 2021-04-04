@@ -24,7 +24,11 @@ export const EventsScreen = ({ navigation }) => {
   const [eventName, setEventName] = useState("");
   const [name, setName] = useState("");
   const [date, setDate] = useState(moment(Date.now()));
-  const [time, setTime] = useState(Date.now());
+  const [time, setTime] = useState(new Date(1598051730000));
+
+  const ClearEvent = () => {
+    navigation.navigate("Calendar");
+  };
 
   return (
     <AccountBackground>
@@ -61,7 +65,10 @@ export const EventsScreen = ({ navigation }) => {
             <AuthButton
               icon="email"
               mode="contained"
-              onPress={() => setEvent(date, name, eventName, time)}
+              onPress={() => {
+                setEvent(date, name, eventName, time);
+                ClearEvent(date, name, eventName, time);
+              }}
             >
               Opret Event
             </AuthButton>

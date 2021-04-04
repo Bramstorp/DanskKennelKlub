@@ -6,8 +6,13 @@ import { Button } from "react-native-paper";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 
+import { EventsContext } from "../../../services/events/events.context";
+import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+
 export const CalendarDetailScreen = ({ route }) => {
   const { calendar } = route.params;
+  const { joinEvents } = useContext(EventsContext);
+  const { user } = useContext(AuthenticationContext);
 
   return (
     <SafeArea>
@@ -19,14 +24,14 @@ export const CalendarDetailScreen = ({ route }) => {
           <Text>{calendar.name}</Text>
         </Spacer>
         <Spacer size="medium">
-          <Text>test</Text>
+          <Text>{calendar.eventName}</Text>
         </Spacer>
       </DetailEventCard>
       <DetaiContainer>
         <Button
           mode="contained"
           color="red"
-          onPress={() => console.log("pressed")}
+          onPress={() => joinEvents(user, calendar)}
         >
           Deltag Event
         </Button>
