@@ -76,9 +76,11 @@ export const EventsContextProvider = ({ children }) => {
   };
 
   const joinEvents = (user, calendar) => {
-    var ref = firebase.database().ref("user/events/" + user.uid);
-    ref.once("value", function (snapshot) {
-      console.log(snapshot.key);
+    var ref = firebase.database().ref("calendar/events/" + calendar.date);
+    ref.once("child_added", function (snapshot) {
+      snapshot.forEach(function (child) {
+        console.log(child.key + ": " + child.val());
+      });
     });
   };
 
