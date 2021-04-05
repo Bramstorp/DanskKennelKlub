@@ -2,7 +2,7 @@ import React, { useState, useEffect, createContext } from "react";
 
 import * as firebase from "firebase";
 
-import moment from "moment";
+import { useFocusEffect } from "@react-navigation/native";
 
 export const EventsContext = createContext();
 
@@ -24,7 +24,7 @@ export const EventsContextProvider = ({ children }) => {
       });
   }, []);
 
-  const setEvent = (date, name, eventName, starttime, user) => {
+  const setEvent = (date, name, eventName, starttime, endtime, user) => {
     setEventIsLoading(true);
     const dateKeyParam = date;
 
@@ -35,6 +35,7 @@ export const EventsContextProvider = ({ children }) => {
             name: name,
             eventName: eventName,
             starttime: starttime,
+            endtime: endtime,
             date: date,
           },
         ],
@@ -46,6 +47,7 @@ export const EventsContextProvider = ({ children }) => {
             name: name,
             eventName: eventName,
             starttime: starttime,
+            endtime: endtime,
             date: date,
           });
         } else {
@@ -55,6 +57,7 @@ export const EventsContextProvider = ({ children }) => {
                 name: name,
                 eventName: eventName,
                 starttime: starttime,
+                endtime: endtime,
                 date: date,
               },
             ],
@@ -73,13 +76,10 @@ export const EventsContextProvider = ({ children }) => {
   };
 
   const joinEvents = (user, calendar) => {
-    setEvent(
-      calendar.date,
-      calendar.name,
-      calendar.eventName,
-      calendar.starttime,
-      user.email
-    );
+    var ref = firebase.database().ref("user/events/" + user.uid);
+    ref.once("value", function (snapshot) {
+      console.log(snapshot.key);
+    });
   };
 
   return (

@@ -14,7 +14,7 @@ import {
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-export const CustomTimePicker = (props) => {
+export const CustomeEndTimePicker = (props) => {
   const [time, setTime] = useState(new Date(1598051730000));
   const [show, setShow] = useState(false);
 
@@ -84,7 +84,7 @@ export const CustomTimePicker = (props) => {
   );
 };
 
-CustomTimePicker.defaultProps = {
+CustomeEndTimePicker.defaultProps = {
   textStyle: {},
   defaultDate: {},
   onDateChange: () => {},

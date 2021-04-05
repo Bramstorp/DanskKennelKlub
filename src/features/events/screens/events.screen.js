@@ -14,7 +14,8 @@ import {
 } from "../../account/components/account.styles";
 
 import { CustomDatePicker } from "../components/customdatepicker.components";
-import { CustomTimePicker } from "../components/customtimepicker.components";
+import { CustomeStartTimePicker } from "../components/customstarttimepicker.components";
+import { CustomeEndTimePicker } from "../components/customendtimepicker.components";
 
 import moment from "moment";
 
@@ -24,7 +25,8 @@ export const EventsScreen = ({ navigation }) => {
   const [eventName, setEventName] = useState("");
   const [name, setName] = useState("");
   const [date, setDate] = useState(moment(Date.now()));
-  const [time, setTime] = useState(new Date(1598051730000));
+  const [startTime, setStartTime] = useState(new Date(1598051730000));
+  const [endTime, setEndTime] = useState(new Date(1598051730000));
 
   const ClearEvent = () => {
     navigation.navigate("Calendar");
@@ -58,29 +60,29 @@ export const EventsScreen = ({ navigation }) => {
           />
         </Spacer>
         <Spacer size="large">
-          <CustomTimePicker onChange={(value) => setTime(value)} />
+          <CustomeStartTimePicker onChange={(value) => setStartTime(value)} />
         </Spacer>
         <Spacer size="large">
-          {!isEventLoading ? (
-            <AuthButton
-              icon="email"
-              mode="contained"
-              onPress={() => {
-                setEvent(
-                  date.format(moment.HTML5_FMT.DATE),
-                  name,
-                  eventName,
-                  `${time.getUTCHours()}:${time.getMinutes()}`,
-                  ""
-                );
-                ClearEvent();
-              }}
-            >
-              Opret Event
-            </AuthButton>
-          ) : (
-            <ActivityIndicator animating={true} />
-          )}
+          <CustomeEndTimePicker onChange={(value) => setEndTime(value)} />
+        </Spacer>
+        <Spacer size="large">
+          <AuthButton
+            icon="email"
+            mode="contained"
+            onPress={() => {
+              setEvent(
+                date.format(moment.HTML5_FMT.DATE),
+                name,
+                eventName,
+                `${startTime.getUTCHours()}:${startTime.getMinutes()}`,
+                `${endTime.getUTCHours()}:${endTime.getMinutes()}`,
+                ""
+              );
+              ClearEvent();
+            }}
+          >
+            Opret Event
+          </AuthButton>
         </Spacer>
       </AccountContainer>
       <Spacer size="large">
