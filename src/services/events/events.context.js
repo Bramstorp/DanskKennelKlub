@@ -26,19 +26,16 @@ export const EventsContextProvider = ({ children }) => {
 
   const setEvent = (date, name, eventName, starttime, user) => {
     setEventIsLoading(true);
-    const dateFormat = date.format(moment.HTML5_FMT.DATE);
-    const dateKeyParam = dateFormat;
-
-    const start = `${starttime.getUTCHours()}:${starttime.getMinutes()}`;
+    const dateKeyParam = date;
 
     if (events.length === 0) {
       events.push({
-        [dateFormat]: [
+        [date]: [
           {
             name: name,
             eventName: eventName,
-            starttime: start,
-            date: dateFormat,
+            starttime: starttime,
+            date: date,
           },
         ],
       });
@@ -48,17 +45,17 @@ export const EventsContextProvider = ({ children }) => {
           events[0][key].push({
             name: name,
             eventName: eventName,
-            starttime: start,
-            date: dateFormat,
+            starttime: starttime,
+            date: date,
           });
         } else {
           const data = {
-            [dateFormat]: [
+            [date]: [
               {
                 name: name,
                 eventName: eventName,
-                starttime: start,
-                date: dateFormat,
+                starttime: starttime,
+                date: date,
               },
             ],
           };
@@ -81,7 +78,7 @@ export const EventsContextProvider = ({ children }) => {
       calendar.name,
       calendar.eventName,
       calendar.starttime,
-      user
+      user.email
     );
   };
 

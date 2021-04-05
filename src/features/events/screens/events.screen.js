@@ -66,8 +66,14 @@ export const EventsScreen = ({ navigation }) => {
               icon="email"
               mode="contained"
               onPress={() => {
-                setEvent(date, name, eventName, time);
-                ClearEvent(date, name, eventName, time);
+                setEvent(
+                  date.format(moment.HTML5_FMT.DATE),
+                  name,
+                  eventName,
+                  `${time.getUTCHours()}:${time.getMinutes()}`,
+                  ""
+                );
+                ClearEvent();
               }}
             >
               Opret Event
