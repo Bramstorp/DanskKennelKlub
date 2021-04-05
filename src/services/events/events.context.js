@@ -24,7 +24,7 @@ export const EventsContextProvider = ({ children }) => {
       });
   }, []);
 
-  const setEvent = (date, name, eventName, starttime) => {
+  const setEvent = (date, name, eventName, starttime, user) => {
     setEventIsLoading(true);
     const dateFormat = date.format(moment.HTML5_FMT.DATE);
     const dateKeyParam = dateFormat;
@@ -76,12 +76,13 @@ export const EventsContextProvider = ({ children }) => {
   };
 
   const joinEvents = (user, calendar) => {
-    console.log(user.email);
-    console.log(calendar.date);
-    firebase
-      .database()
-      .ref("calendar/events/" + calendar.date)
-      .update("test");
+    setEvent(
+      calendar.date,
+      calendar.name,
+      calendar.eventName,
+      calendar.starttime,
+      user
+    );
   };
 
   return (
