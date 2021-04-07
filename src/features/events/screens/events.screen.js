@@ -76,7 +76,6 @@ export const EventsScreen = ({ navigation }) => {
                 eventName,
                 `${startTime.getUTCHours()}:${startTime.getMinutes()}`,
                 `${endTime.getUTCHours()}:${endTime.getMinutes()}`,
-                ""
               );
               ClearEvent();
             }}

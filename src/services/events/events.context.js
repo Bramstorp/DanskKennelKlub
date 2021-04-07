@@ -2,8 +2,6 @@ import React, { useState, useEffect, createContext } from "react";
 
 import * as firebase from "firebase";
 
-import { useFocusEffect } from "@react-navigation/native";
-
 export const EventsContext = createContext();
 
 export const EventsContextProvider = ({ children }) => {
@@ -24,7 +22,7 @@ export const EventsContextProvider = ({ children }) => {
       });
   }, []);
 
-  const setEvent = (date, name, eventName, starttime, endtime, user) => {
+  const setEvent = (date, name, eventName, starttime, endtime) => {
     setEventIsLoading(true);
     const dateKeyParam = date;
 
