@@ -20,7 +20,7 @@ import { CustomeEndTimePicker } from "../components/customendtimepicker.componen
 import moment from "moment";
 
 export const EventsScreen = ({ navigation }) => {
-  const { setEvent, isEventLoading } = useContext(EventsContext);
+  const { setEvent } = useContext(EventsContext);
 
   const [eventName, setEventName] = useState("");
   const [name, setName] = useState("");
@@ -28,9 +28,6 @@ export const EventsScreen = ({ navigation }) => {
   const [startTime, setStartTime] = useState(new Date(1598051730000));
   const [endTime, setEndTime] = useState(new Date(1598051730000));
 
-  const ClearEvent = () => {
-    navigation.navigate("Calendar");
-  };
 
   return (
     <AccountBackground>
@@ -75,9 +72,9 @@ export const EventsScreen = ({ navigation }) => {
                 name,
                 eventName,
                 `${startTime.getUTCHours()}:${startTime.getMinutes()}`,
-                `${endTime.getUTCHours()}:${endTime.getMinutes()}`,
+                `${endTime.getUTCHours()}:${endTime.getMinutes()}`
               );
-              ClearEvent();
+              navigation.navigate("Home");
             }}
           >
             Opret Event

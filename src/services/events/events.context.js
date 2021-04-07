@@ -6,7 +6,7 @@ export const EventsContext = createContext();
 
 export const EventsContextProvider = ({ children }) => {
   const [isEventLoading, setEventIsLoading] = useState(false);
-  const [events, setEvents] = useState([]);
+  const [eventsList, setEventsList] = useState([]);
 
   useEffect(() => {
     firebase
@@ -18,7 +18,7 @@ export const EventsContextProvider = ({ children }) => {
         snapshot.forEach((child) => {
           values.push(child.val());
         });
-        setEvents(values);
+        setEventsList(values);
       });
   }, []);
 
@@ -26,8 +26,8 @@ export const EventsContextProvider = ({ children }) => {
     setEventIsLoading(true);
     const dateKeyParam = date;
 
-    if (events.length === 0) {
-      events.push({
+    if (eventsList.length === 0) {
+      eventsList.push({
         [date]: [
           {
             name: name,
@@ -39,9 +39,9 @@ export const EventsContextProvider = ({ children }) => {
         ],
       });
     } else {
-      Object.entries(events[0]).forEach(([key]) => {
+      Object.entries(eventsList[0]).forEach(([key]) => {
         if (key === dateKeyParam) {
-          events[0][key].push({
+          eventsList[0][key].push({
             name: name,
             eventName: eventName,
             starttime: starttime,
@@ -60,16 +60,17 @@ export const EventsContextProvider = ({ children }) => {
               },
             ],
           };
-          Object.assign(events[0], data);
+          Object.assign(eventsList[0], data);
         }
       });
     }
     firebase
       .database()
       .ref("calendar/events")
-      .update(events[0])
+      .update(eventsList[0])
       .then(function () {
         setEventIsLoading(false);
+        setEventsList([]);
       });
   };
 
