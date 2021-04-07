@@ -77,10 +77,11 @@ export const EventsContextProvider = ({ children }) => {
 
   const joinEvents = (user, calendar) => {
     var ref = firebase.database().ref("calendar/events/" + calendar.date);
+    const user_data = {
+      users: [{ user_id: user.uid, user_email: user.email }],
+    };
     ref.once("child_added", function (snapshot) {
-      snapshot.forEach(function (child) {
-        console.log(child.key + ": " + child.val());
-      });
+      snapshot.ref.update(user_data);
     });
   };
 
