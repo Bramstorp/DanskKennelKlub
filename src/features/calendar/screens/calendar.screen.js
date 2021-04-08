@@ -70,6 +70,7 @@ export const CalendarScreen = ({ navigation }) => {
     );
   };
 
+
   return (
     <SafeArea>
       {!isLoading ? (
@@ -80,6 +81,11 @@ export const CalendarScreen = ({ navigation }) => {
           futureScrollRange={5}
           renderEmptyDate={emptyDate}
           renderEmptyData={emptyData}
+          theme={{
+            agendaDayTextColor: "red",
+            agendaTodayColor: 'red',
+            agendaKnobColor: 'red',
+          }}
         />
       ) : (
         <ActivityIndicator animating={true} color={Colors.blue300} />

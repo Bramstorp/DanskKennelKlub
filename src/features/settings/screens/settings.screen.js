@@ -1,13 +1,10 @@
 import React, { useContext } from "react";
 import styled from "styled-components/native";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, Image } from "react-native";
 
 import { List } from "react-native-paper";
-
 import { Text } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
-
-import { SafeArea } from "../../../components/utility/safe-area.component";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 
 import { SettingsEventsCards } from "../components/settings-events-cards";
@@ -24,6 +21,7 @@ export const SettingsScreen = ({ navigation }) => {
   return (
     <SafeAreaView>
       <AvatarContainer>
+        <Image source={require("../../../../assets/dkk-logo.png")} />
         <Spacer position="top" size="large">
           <Text variant="label">{user.email}</Text>
         </Spacer>

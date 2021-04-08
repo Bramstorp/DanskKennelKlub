@@ -3,17 +3,10 @@ import {
   createStackNavigator,
   CardStyleInterpolators,
 } from "@react-navigation/stack";
-import { View, Text } from "react-native";
+
+import { HomeScreen } from "../../features/home/screens/home.screen";
 
 const HomeStack = createStackNavigator();
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
 
 export const HomeNavigator = ({ route, navigation }) => {
   return (
