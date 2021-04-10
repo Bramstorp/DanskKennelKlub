@@ -84,8 +84,8 @@ export const EventsContextProvider = ({ children }) => {
       user: user.email,
     };
 
-    const ref = firebase.database().ref("users/" + user.uid)
-    ref.update([user_data])
+    const ref = firebase.database().ref(`users/${user.uid}/`)
+    ref.push(user_data)
 
   };
 
