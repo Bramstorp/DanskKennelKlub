@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components/native";
 import { SafeAreaView, Image } from "react-native";
 
@@ -9,6 +9,8 @@ import { AuthenticationContext } from "../../../services/authentication/authenti
 
 import { SettingsEventsCards } from "../components/settings-events-cards";
 
+import * as firebase from "firebase";
+
 const SettingsItem = styled(List.Item)`
   padding: ${(props) => props.theme.space[3]};
 `;
@@ -16,8 +18,26 @@ const AvatarContainer = styled.View`
   align-items: center;
 `;
 
-export const SettingsScreen = ({ navigation }) => {
+export const SettingsScreen = () => {
   const { onLogout, user } = useContext(AuthenticationContext);
+  const [events, setEvents]  = useState([])
+
+  console.log(events)
+  
+  useEffect(() => {
+    firebase
+      .database()
+      .ref(`users/${user.uid}`)
+      .once("value")
+      .then((snapshot) => {
+        const values = []
+        snapshot.forEach((child) => {
+          values.push(child.val());
+        });
+        setEvents(values);
+      });
+  }, []);
+
   return (
     <SafeAreaView>
       <AvatarContainer>
@@ -26,7 +46,7 @@ export const SettingsScreen = ({ navigation }) => {
           <Text variant="label">{user.email}</Text>
         </Spacer>
       </AvatarContainer>
-      <SettingsEventsCards />
+      <SettingsEventsCards data={events}/>
       <List.Section>
         <SettingsItem
           title="Logout"

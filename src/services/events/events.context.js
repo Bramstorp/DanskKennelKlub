@@ -70,7 +70,6 @@ export const EventsContextProvider = ({ children }) => {
       .update(eventsList[0])
       .then(function () {
         setEventIsLoading(false);
-        setEventsList([]);
       });
   };
 

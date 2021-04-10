@@ -6,6 +6,7 @@ import { TouchableOpacity } from "react-native";
 import { Test, EventCardCover } from "./settings-events-styles";
 
 export const SettingsEventsCards = () => {  
+
   return (
     <TouchableOpacity>
       <EventCardCover>

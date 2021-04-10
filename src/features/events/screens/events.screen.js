@@ -74,7 +74,7 @@ export const EventsScreen = ({ navigation }) => {
                 `${startTime.getUTCHours()}:${startTime.getMinutes()}`,
                 `${endTime.getUTCHours()}:${endTime.getMinutes()}`
               );
-              navigation.navigate("Home");
+              navigation.navigate("Homescreen");
             }}
           >
             Opret Event
