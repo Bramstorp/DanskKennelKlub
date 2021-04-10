@@ -30,15 +30,10 @@ export const EventsContextProvider = ({ children }) => {
       endtime: endtime,
       date: date,
     };
-
     const ref = firebase.database().ref("calendar/events/" + date)
     ref.once("value")
     .then(function(snapshot) {
-      if (snapshot.exists()) {
-        snapshot.ref.push(data)
-      } else {
-        snapshot.ref.push(data);
-      }
+      snapshot.ref.push(data)
     });
   };
 

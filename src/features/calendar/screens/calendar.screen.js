@@ -16,24 +16,18 @@ export const CalendarScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    FetchCalendarData()
-  }, [])
-
-  const FetchCalendarData = () => {
-    firebase
-      .database()
-      .ref("calendar/events")
-      .once("value")
-      .then((snapshot) => {
-        let values = [];
-        snapshot.forEach((child) => {
-          values.push(child.val());
+    const ref = firebase.database().ref("calendar/events");
+    ref.once("value").then((snapshot) => {
+      let result = {};
+      snapshot.forEach((daySnapshot) => {
+        result[daySnapshot.key] = [];
+        daySnapshot.forEach((eventSnapshot) => {
+          result[daySnapshot.key].push(eventSnapshot.val());
         });
-        console.log(JSON.stringify(values))
-        setDate(values);
       });
-  };
-  //useFocusEffect(FetchCalendarData);
+      setDate(result)
+    });
+  }, [])
 
   const renderItem = (item) => {
     return (
@@ -80,7 +74,7 @@ export const CalendarScreen = ({ navigation }) => {
     <SafeArea>
       {!isLoading ? (
         <Agenda
-          items={date[0]}
+          items={date}
           renderItem={renderItem}
           pastScrollRange={5}
           futureScrollRange={5}
