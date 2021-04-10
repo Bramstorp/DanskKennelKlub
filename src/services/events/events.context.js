@@ -23,54 +23,23 @@ export const EventsContextProvider = ({ children }) => {
   }, []);
 
   const setEvent = (date, name, eventName, starttime, endtime) => {
-    setEventIsLoading(true);
-    const dateKeyParam = date;
+    const data = {
+      name: name,
+      eventName: eventName,
+      starttime: starttime,
+      endtime: endtime,
+      date: date,
+    };
 
-    if (eventsList.length === 0) {
-      eventsList.push({
-        [date]: [
-          {
-            name: name,
-            eventName: eventName,
-            starttime: starttime,
-            endtime: endtime,
-            date: date,
-          },
-        ],
-      });
-    } else {
-      Object.entries(eventsList[0]).forEach(([key]) => {
-        if (key === dateKeyParam) {
-          eventsList[0][key].push({
-            name: name,
-            eventName: eventName,
-            starttime: starttime,
-            endtime: endtime,
-            date: date,
-          });
-        } else {
-          const data = {
-            [date]: [
-              {
-                name: name,
-                eventName: eventName,
-                starttime: starttime,
-                endtime: endtime,
-                date: date,
-              },
-            ],
-          };
-          Object.assign(eventsList[0], data);
-        }
-      });
-    }
-    firebase
-      .database()
-      .ref("calendar/events")
-      .update(eventsList[0])
-      .then(function () {
-        setEventIsLoading(false);
-      });
+    const ref = firebase.database().ref("calendar/events/" + date)
+    ref.once("value")
+    .then(function(snapshot) {
+      if (snapshot.exists()) {
+        snapshot.ref.push(data)
+      } else {
+        snapshot.ref.push(data);
+      }
+    });
   };
 
   const joinEvents = (user, calendar) => {

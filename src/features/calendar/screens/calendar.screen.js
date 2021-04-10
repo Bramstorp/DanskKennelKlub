@@ -15,20 +15,25 @@ export const CalendarScreen = ({ navigation }) => {
   const [date, setDate] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    FetchCalendarData()
+  }, [])
+
   const FetchCalendarData = () => {
     firebase
       .database()
-      .ref("calendar")
+      .ref("calendar/events")
       .once("value")
       .then((snapshot) => {
         let values = [];
         snapshot.forEach((child) => {
           values.push(child.val());
         });
+        console.log(JSON.stringify(values))
         setDate(values);
       });
   };
-  useFocusEffect(FetchCalendarData);
+  //useFocusEffect(FetchCalendarData);
 
   const renderItem = (item) => {
     return (
