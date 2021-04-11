@@ -21,8 +21,6 @@ const AvatarContainer = styled.View`
 export const SettingsScreen = () => {
   const { onLogout, user } = useContext(AuthenticationContext);
   const [events, setEvents]  = useState([])
-
-  console.log(events)
   
   useEffect(() => {
     firebase
@@ -46,7 +44,7 @@ export const SettingsScreen = () => {
           <Text variant="label">{user.email}</Text>
         </Spacer>
       </AvatarContainer>
-      <SettingsEventsCards data={events}/>
+      <SettingsEventsCards events={events}/>
       <List.Section>
         <SettingsItem
           title="Logout"

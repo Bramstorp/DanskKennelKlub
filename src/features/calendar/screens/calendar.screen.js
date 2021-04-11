@@ -7,7 +7,6 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import { EventCard, EmptyDate } from "../components/calendar-style";
 import { Agenda } from "react-native-calendars";
 import { Text } from "../../../components/typography/text.component";
-import { useFocusEffect } from "@react-navigation/native";
 
 import * as firebase from "firebase";
 
