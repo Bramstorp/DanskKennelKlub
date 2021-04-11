@@ -18,7 +18,7 @@ const AvatarContainer = styled.View`
   align-items: center;
 `;
 
-export const SettingsScreen = () => {
+export const SettingsScreen = ({ navigation }) => {
   const { onLogout, user } = useContext(AuthenticationContext);
   const [events, setEvents]  = useState([])
   
@@ -44,7 +44,7 @@ export const SettingsScreen = () => {
           <Text variant="label">{user.email}</Text>
         </Spacer>
       </AvatarContainer>
-      <SettingsEventsCards events={events}/>
+      <SettingsEventsCards events={events} navigation={navigation}/>
       <List.Section>
         <SettingsItem
           title="Logout"

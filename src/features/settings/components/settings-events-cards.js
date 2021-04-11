@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Text } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { TouchableOpacity, View } from "react-native";
 import { DetailEventCard } from "./settings-events-styles";
 
-export const SettingsEventsCards = ({ events }) => {
+export const SettingsEventsCards = ({ events, navigation }) => {
   if (!events.length) {
     return null;
   }
   const userEvents = events.map((event) => {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("SettingsDetail", {
+            events: event,
+          })
+        }
+      >
         <DetailEventCard>
           <Text>
             {event.starttime} - {event.endtime}
@@ -25,5 +31,9 @@ export const SettingsEventsCards = ({ events }) => {
       </TouchableOpacity>
     );
   });
-  return <View>{userEvents}</View>;
+  return (
+    <View>
+      {userEvents}
+    </View>
+  )
 };
