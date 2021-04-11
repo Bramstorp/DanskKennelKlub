@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Appbar } from 'react-native-paper';
 import { Text } from "react-native";
 import { DetailEventCard } from "../components/settings-events-styles";
 
@@ -11,6 +12,11 @@ export const SettingsDetailScreen = ({ route }) => {
 
   return (
     <SafeArea>
+      <Appbar.Header style={{backgroundColor: "red"}}>
+        <Appbar.BackAction />
+        <Appbar.Content title={events.name} subtitle="Dansk Kennel Klub" />
+        <Appbar.Action icon="dots-vertical" />
+      </Appbar.Header>
       <DetailEventCard>
         <Text>
           {events.starttime} - {events.endtime}

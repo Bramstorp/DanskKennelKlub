@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Text } from "react-native";
 import { DetaiContainer, DetailEventCard } from "../components/calendar-style";
-import { Button } from "react-native-paper";
+import { Button, Appbar } from "react-native-paper";
 
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
@@ -16,6 +16,11 @@ export const CalendarDetailScreen = ({ route }) => {
 
   return (
     <SafeArea>
+      <Appbar.Header style={{backgroundColor: "red"}}>
+        <Appbar.BackAction />
+        <Appbar.Content title={calendar.name} subtitle="Dansk Kennel Klub" />
+        <Appbar.Action icon="dots-vertical" />
+      </Appbar.Header>
       <DetailEventCard>
         <Text>
           {calendar.starttime} - {calendar.endtime}
