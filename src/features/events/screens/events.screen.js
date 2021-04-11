@@ -4,6 +4,7 @@ import { ActivityIndicator } from "react-native-paper";
 import { Spacer } from "../../../components/spacer/spacer.component";
 
 import { EventsContext } from "../../../services/events/events.context";
+import { AuthenticationContext } from "../../../services/authentication/authentication.context"
 
 import {
   AccountBackground,
@@ -21,13 +22,12 @@ import moment from "moment";
 
 export const EventsScreen = ({ navigation }) => {
   const { setEvent } = useContext(EventsContext);
+  const { user } = useContext(AuthenticationContext);
 
   const [eventName, setEventName] = useState("");
-  const [name, setName] = useState("");
   const [date, setDate] = useState(moment(Date.now()));
   const [startTime, setStartTime] = useState(new Date(1598051730000));
   const [endTime, setEndTime] = useState(new Date(1598051730000));
-
 
   return (
     <AccountBackground>
@@ -42,14 +42,6 @@ export const EventsScreen = ({ navigation }) => {
           autoCapitalize="none"
           onChangeText={(u) => setEventName(u)}
         />
-        <Spacer size="large">
-          <AuthInput
-            label="Træner Navn"
-            value={name}
-            autoCapitalize="none"
-            onChangeText={(u) => setName(u)}
-          />
-        </Spacer>
         <Spacer size="large">
           <CustomDatePicker
             onChange={(value) => setDate(moment(value))}
@@ -69,7 +61,7 @@ export const EventsScreen = ({ navigation }) => {
             onPress={() => {
               setEvent(
                 date.format(moment.HTML5_FMT.DATE),
-                name,
+                user.email,
                 eventName,
                 `${startTime.getUTCHours()}:${startTime.getMinutes()}`,
                 `${endTime.getUTCHours()}:${endTime.getMinutes()}`
