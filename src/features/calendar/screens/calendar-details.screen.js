@@ -9,7 +9,7 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import { EventsContext } from "../../../services/events/events.context";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 
-export const CalendarDetailScreen = ({ route }) => {
+export const CalendarDetailScreen = ({ route, navigation }) => {
   const { calendar } = route.params;
   const { joinEvents } = useContext(EventsContext);
   const { user } = useContext(AuthenticationContext);
@@ -17,7 +17,7 @@ export const CalendarDetailScreen = ({ route }) => {
   return (
     <SafeArea>
       <Appbar.Header style={{backgroundColor: "red"}}>
-        <Appbar.BackAction />
+        <Appbar.BackAction onPress={() => navigation.goBack()}/>
         <Appbar.Content title={calendar.name} subtitle="Dansk Kennel Klub" />
         <Appbar.Action icon="dots-vertical" />
       </Appbar.Header>

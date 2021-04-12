@@ -7,13 +7,13 @@ import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 
 
-export const SettingsDetailScreen = ({ route }) => {
+export const SettingsDetailScreen = ({ route, navigation }) => {
   const { events } = route.params;
 
   return (
     <SafeArea>
       <Appbar.Header style={{backgroundColor: "red"}}>
-        <Appbar.BackAction />
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={events.name} subtitle="Dansk Kennel Klub" />
         <Appbar.Action icon="dots-vertical" />
       </Appbar.Header>
