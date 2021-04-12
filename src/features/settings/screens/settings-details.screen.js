@@ -7,8 +7,13 @@ import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { AntDesign } from '@expo/vector-icons'; 
 
+import { EventsContext } from "../../../services/events/events.context";
+import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+
 export const SettingsDetailScreen = ({ route, navigation }) => {
   const { events } = route.params;
+  const { removeEvent } = useContext(EventsContext);
+  const { user } = useContext(AuthenticationContext);
 
   return (
     <SafeArea>
@@ -28,7 +33,7 @@ export const SettingsDetailScreen = ({ route, navigation }) => {
           <Text>{events.eventName}</Text>
         </Spacer>
         <CancelBtn>
-          <AntDesign name="closecircleo" size={30} color="red" />
+          <AntDesign name="closecircleo" size={30} color="red" onPress={() => removeEvent(user, events)} />
         </CancelBtn>
       </DetailEventCard>
     </SafeArea>
