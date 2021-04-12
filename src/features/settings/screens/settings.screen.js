@@ -44,7 +44,7 @@ export const SettingsScreen = ({ navigation }) => {
           <Text variant="label">{user.email}</Text>
         </Spacer>
       </AvatarContainer>
-      <SettingsEventsCards events={events} navigation={navigation}/>
+      <SettingsEventsCards key={events.key} events={events} navigation={navigation}/>
       <List.Section>
         <SettingsItem
           title="Logout"
