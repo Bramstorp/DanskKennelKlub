@@ -1,5 +1,7 @@
 import styled from "styled-components/native";
 import { TextInput } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { TouchableHighlight } from "react-native";
 
 export const DetaiContainer = styled.View`
   flex: 1;
@@ -38,4 +40,15 @@ export const AccountContainer = styled.View`
   background-color: rgba(255, 255, 255, 0.7);
   padding: ${(props) => props.theme.space[4]};
   margin-top: ${(props) => props.theme.space[2]};
+`;
+
+export const CancelBtn = styled(TouchableHighlight)`
+  position: absolute;
+  top: 0;
+  height: 95px;
+  padding-horizontal: 30px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  right: 0;
 `;

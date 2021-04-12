@@ -83,6 +83,8 @@ export const CalendarScreen = ({ navigation }) => {
             agendaDayTextColor: "red",
             agendaTodayColor: 'red',
             agendaKnobColor: 'red',
+            selectedDayBackgroundColor: 'red',
+            dotColor: "red",
           }}
         />
       ) : (
