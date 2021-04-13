@@ -6,7 +6,7 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 
 import { SettingsEventsCards } from "../components/settings-events-cards";
-import { SettingsItem, AvatarContainer, AuthButton } from "../components/settings-screen.styles"
+import { SettingsItem, AvatarContainer, EditButton } from "../components/settings-screen.styles"
 
 import * as firebase from "firebase";
 
@@ -37,12 +37,12 @@ export const SettingsScreen = ({ navigation }) => {
           <Text variant="label">{user.displayName}</Text>
         </Spacer>
         <Spacer size="large">
-          <AuthButton
+          <EditButton
             mode="contained"
             onPress={() => navigation.navigate("SettingsProfile")}
           >
             Redigere Profil
-          </AuthButton>
+          </EditButton>
         </Spacer>
       </AvatarContainer>
       <SettingsEventsCards

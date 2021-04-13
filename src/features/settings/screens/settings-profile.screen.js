@@ -12,6 +12,7 @@ export const SettingsProfileScreen = ({ navigation }) => {
           <Appbar.Action icon="check"  />
           <Appbar.Action icon="dots-vertical"  />
         </Appbar.Header>
+        <Text>Test</Text>
       </SafeAreaView>
     );
 }
