@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { Button, List } from "react-native-paper";
+import { Button, List, TextInput } from "react-native-paper";
 import { colors } from "../../../infrastructure/theme/colors";
 
 export const SettingsItem = styled(List.Item)`
@@ -17,3 +17,18 @@ export const EditButton = styled(Button).attrs({
     align-items: center; 
 `;
 
+export const AccountContainer = styled.View`
+  padding-top: ${(props) => props.theme.space[5]};
+  align-items: center;
+`;
+
+export const AccountInput = styled(TextInput)`
+  width: 300px;
+`;
+
+export const DoneButton = styled(Button).attrs({
+  color: colors.brand.danger,
+})`
+  padding: ${(props) => props.theme.space[2]};
+  width: 200px;
+`;
