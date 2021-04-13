@@ -32,7 +32,7 @@ export const AuthenticationContextProvider = ({ children }) => {
       });
   };
 
-  const onRegister = (email, password, repeatedPassword) => {
+  const onRegister = (fullName, email, password, repeatedPassword) => {
     setIsLoading(true);
     if (password !== repeatedPassword) {
       setError("Error: Passwords do not match");
@@ -41,9 +41,10 @@ export const AuthenticationContextProvider = ({ children }) => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then((u) => {
-        setUser(u);
+      .then((userData) => {
         setIsLoading(false);
+        userData.user.updateProfile({displayName: fullName})
+        .catch((error) => console.log(error));
       })
       .catch((e) => {
         setIsLoading(false);

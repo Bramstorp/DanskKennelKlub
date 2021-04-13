@@ -1,6 +1,5 @@
 import styled from "styled-components/native";
 import { TextInput } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 import { TouchableHighlight } from "react-native";
 
 export const DetaiContainer = styled.View`
@@ -31,6 +30,7 @@ export const EmptyDate = styled.View`
   margin: 5px;
   border-radius: 15px;
 `;
+
 
 export const AuthInput = styled(TextInput)`
   width: 300px;

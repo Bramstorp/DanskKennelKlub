@@ -1,6 +1,7 @@
 import React from "react";
 import { SettingsScreen } from "../../features/settings/screens/settings.screen";
 import { SettingsDetailScreen } from "../../features/settings/screens/settings-details.screen"
+import { SettingsProfileScreen } from "../../features/settings/screens/settings-profile.screen"
 import {
   createStackNavigator,
   CardStyleInterpolators,
@@ -29,6 +30,13 @@ export const SettingsNavigator = ({ route, navigation }) => {
         }}
         name="SettingsDetail"
         component={SettingsDetailScreen}
+      />
+      <SettingsStack.Screen
+        options={{
+          header: () => null,
+        }}
+        name="SettingsProfile"
+        component={SettingsProfileScreen}
       />
     </SettingsStack.Navigator>
   );
