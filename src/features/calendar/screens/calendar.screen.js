@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
-import { ActivityIndicator, Colors } from "react-native-paper";
 
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
@@ -12,7 +11,6 @@ import * as firebase from "firebase";
 
 export const CalendarScreen = ({ navigation }) => {
   const [date, setDate] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const ref = firebase.database().ref("calendar/events");
@@ -71,7 +69,6 @@ export const CalendarScreen = ({ navigation }) => {
 
   return (
     <SafeArea>
-      {!isLoading ? (
         <Agenda
           items={date}
           renderItem={renderItem}
@@ -87,9 +84,6 @@ export const CalendarScreen = ({ navigation }) => {
             dotColor: "#d9534f",
           }}
         />
-      ) : (
-        <ActivityIndicator animating={true} color={Colors.blue300} />
-      )}
     </SafeArea>
   );
 };

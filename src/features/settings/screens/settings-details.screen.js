@@ -13,7 +13,7 @@ import { colors } from "../../../infrastructure/theme/colors";
 
 export const SettingsDetailScreen = ({ route, navigation }) => {
   const { events } = route.params;
-  const { removeEvent } = useContext(EventsContext);
+  const { removeEventFromUser } = useContext(EventsContext);
   const { user } = useContext(AuthenticationContext);
 
   return (
@@ -34,7 +34,12 @@ export const SettingsDetailScreen = ({ route, navigation }) => {
           <Text>{events.eventName}</Text>
         </Spacer>
         <CancelBtn>
-          <AntDesign name="closecircleo" size={30} color={colors.brand.primary} onPress={() => removeEvent(user, events)} />
+          <AntDesign
+            name="closecircleo"
+            size={30}
+            color={colors.brand.primary}
+            onPress={() => removeEventFromUser(user, events)}
+          />
         </CancelBtn>
       </DetailEventCard>
     </SafeArea>

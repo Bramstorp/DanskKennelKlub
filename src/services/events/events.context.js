@@ -52,10 +52,23 @@ export const EventsContextProvider = ({ children }) => {
 
   };
 
-  const removeEvent = (user, events) => {
+  const removeEventFromUser = (user, events) => {
     firebase
       .database()
       .ref(`users/${user.uid}/`)
+      .orderByChild("eventName")
+      .equalTo(events.eventName)
+      .on("value", function (snapshot) {
+        snapshot.forEach(function (data) {
+          data.ref.remove()
+        });
+      });
+  };
+
+  const removeEvent = (events) => {
+    firebase
+      .database()
+      .ref(`calendar/events/${events.date}/`)
       .orderByChild("eventName")
       .equalTo(events.eventName)
       .on("value", function (snapshot) {
@@ -72,6 +85,7 @@ export const EventsContextProvider = ({ children }) => {
         setEvent,
         isEventLoading,
         joinEvents,
+        removeEventFromUser,
         removeEvent,
       }}
     >
