@@ -10,6 +10,7 @@ import {
 } from "../components/settings-screen.styles";
 
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+import { colors } from "../../../infrastructure/theme/colors";
 
 export const SettingsProfileScreen = ({ navigation }) => {
   const { user } = useContext(AuthenticationContext);
@@ -18,7 +19,7 @@ export const SettingsProfileScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView>
-      <Appbar.Header style={{ backgroundColor: "red" }}>
+      <Appbar.Header style={{ backgroundColor: colors.brand.primary }}>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title="Redigere Profile" subtitle="Dansk Kennel Klub" />
       </Appbar.Header>

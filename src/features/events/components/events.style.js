@@ -1,7 +1,8 @@
 import styled from "styled-components/native";
 import { TouchableHighlight } from "react-native";
-import { Text } from "react-native-paper";
+import { Button, TextInput } from "react-native-paper";
 import { colors } from "../../../infrastructure/theme/colors";
+import { Text } from "../../../components/typography/text.component";
 
 export const EventsTextStyle = styled(Text).attrs({
   color: colors.brand.danger,
@@ -29,4 +30,30 @@ export const DoneButton = styled(TouchableHighlight)`
   align-items: center;
   justify-content: center;
   right: 0;
+`;
+
+export const EventBackground = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const EventContainer = styled.View`
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: ${(props) => props.theme.space[4]};
+  margin-top: ${(props) => props.theme.space[2]};
+`;
+
+export const EventButton = styled(Button).attrs({
+  color: colors.brand.primary,
+})`
+  padding: ${(props) => props.theme.space[2]};
+`;
+
+export const EventInput = styled(TextInput)`
+  width: 300px;
+`;
+
+export const Title = styled(Text)`
+  font-size: 30px;
 `;

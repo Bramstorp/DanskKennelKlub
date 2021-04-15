@@ -7,6 +7,7 @@ import { AuthenticationContext } from "../../../services/authentication/authenti
 
 import { SettingsEventsCards } from "../components/settings-events-cards";
 import { SettingsItem, AvatarContainer, EditButton } from "../components/settings-screen.styles"
+import { colors } from "../../../infrastructure/theme/colors";
 
 import * as firebase from "firebase";
 

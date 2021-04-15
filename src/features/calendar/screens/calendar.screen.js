@@ -80,11 +80,11 @@ export const CalendarScreen = ({ navigation }) => {
           renderEmptyDate={emptyDate}
           renderEmptyData={emptyData}
           theme={{
-            agendaDayTextColor: "red",
-            agendaTodayColor: 'red',
-            agendaKnobColor: 'red',
-            selectedDayBackgroundColor: 'red',
-            dotColor: "red",
+            agendaDayTextColor: "#d9534f",
+            agendaTodayColor: "#d9534f",
+            agendaKnobColor: "#d9534f",
+            selectedDayBackgroundColor: "#d9534f",
+            dotColor: "#d9534f",
           }}
         />
       ) : (

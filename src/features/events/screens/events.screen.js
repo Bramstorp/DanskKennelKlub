@@ -1,18 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Image, View } from "react-native";
-import { ActivityIndicator } from "react-native-paper";
 import { Spacer } from "../../../components/spacer/spacer.component";
 
 import { EventsContext } from "../../../services/events/events.context";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context"
 
 import {
-  AccountBackground,
-  AccountContainer,
-  AuthButton,
-  AuthInput,
+  EventBackground,
+  EventContainer,
+  EventButton,
+  EventInput,
   Title,
-} from "../../account/components/account.styles";
+} from "../components/events.style";
 
 import { CustomDatePicker } from "../components/customdatepicker.components";
 import { CustomeStartTimePicker } from "../components/customstarttimepicker.components";
@@ -30,13 +29,13 @@ export const EventsScreen = ({ navigation }) => {
   const [endTime, setEndTime] = useState(new Date(1598051730000));
 
   return (
-    <AccountBackground>
+    <EventBackground>
       <View>
         <Image source={require("../../../../assets/dkk-logo.png")} />
       </View>
       <Title>Opret Event</Title>
-      <AccountContainer>
-        <AuthInput
+      <EventContainer>
+        <EventInput
           label="Event Navn"
           value={eventName}
           autoCapitalize="none"
@@ -55,7 +54,7 @@ export const EventsScreen = ({ navigation }) => {
           <CustomeEndTimePicker onChange={(value) => setEndTime(value)} />
         </Spacer>
         <Spacer size="large">
-          <AuthButton
+          <EventButton
             icon="email"
             mode="contained"
             onPress={() => {
@@ -70,14 +69,14 @@ export const EventsScreen = ({ navigation }) => {
             }}
           >
             Opret Event
-          </AuthButton>
+          </EventButton>
         </Spacer>
-      </AccountContainer>
+      </EventContainer>
       <Spacer size="large">
-        <AuthButton mode="contained" onPress={() => navigation.goBack()}>
+        <EventButton mode="contained" onPress={() => navigation.goBack()}>
           Back
-        </AuthButton>
+        </EventButton>
       </Spacer>
-    </AccountBackground>
+    </EventBackground>
   );
 };

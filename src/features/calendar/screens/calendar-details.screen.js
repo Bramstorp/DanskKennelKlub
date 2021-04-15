@@ -8,6 +8,7 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 
 import { EventsContext } from "../../../services/events/events.context";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+import { colors } from "../../../infrastructure/theme/colors";
 
 export const CalendarDetailScreen = ({ route, navigation }) => {
   const { calendar } = route.params;
@@ -16,7 +17,7 @@ export const CalendarDetailScreen = ({ route, navigation }) => {
 
   return (
     <SafeArea>
-      <Appbar.Header style={{backgroundColor: "red"}}>
+      <Appbar.Header style={{backgroundColor: colors.brand.primary}}>
         <Appbar.BackAction onPress={() => navigation.goBack()}/>
         <Appbar.Content title={calendar.name} subtitle="Dansk Kennel Klub" />
         <Appbar.Action icon="dots-vertical" />
@@ -35,7 +36,7 @@ export const CalendarDetailScreen = ({ route, navigation }) => {
       <DetaiContainer>
         <Button
           mode="contained"
-          color="red"
+          color={colors.brand.primary}
           onPress={() => joinEvents(user, calendar)}
         >
           Deltag Event

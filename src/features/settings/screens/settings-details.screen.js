@@ -9,6 +9,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 import { EventsContext } from "../../../services/events/events.context";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
+import { colors } from "../../../infrastructure/theme/colors";
 
 export const SettingsDetailScreen = ({ route, navigation }) => {
   const { events } = route.params;
@@ -17,7 +18,7 @@ export const SettingsDetailScreen = ({ route, navigation }) => {
 
   return (
     <SafeArea>
-      <Appbar.Header style={{ backgroundColor: "red" }}>
+      <Appbar.Header style={{ backgroundColor: colors.brand.primary }}>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title={events.name} subtitle="Dansk Kennel Klub" />
         <Appbar.Action icon="dots-vertical" />
@@ -33,7 +34,7 @@ export const SettingsDetailScreen = ({ route, navigation }) => {
           <Text>{events.eventName}</Text>
         </Spacer>
         <CancelBtn>
-          <AntDesign name="closecircleo" size={30} color="red" onPress={() => removeEvent(user, events)} />
+          <AntDesign name="closecircleo" size={30} color={colors.brand.primary} onPress={() => removeEvent(user, events)} />
         </CancelBtn>
       </DetailEventCard>
     </SafeArea>

@@ -10,7 +10,7 @@ export const AvatarContainer = styled.View`
 `;
 
 export const EditButton = styled(Button).attrs({
-    color: colors.brand.danger,
+    color: colors.brand.primary,
   })`
     padding: ${(props) => props.theme.space[2]};
     width: 200px;
@@ -27,7 +27,7 @@ export const AccountInput = styled(TextInput)`
 `;
 
 export const DoneButton = styled(Button).attrs({
-  color: colors.brand.danger,
+  color: colors.brand.primary,
 })`
   padding: ${(props) => props.theme.space[2]};
   width: 200px;
