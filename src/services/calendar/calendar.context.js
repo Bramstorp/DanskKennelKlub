@@ -9,20 +9,18 @@ export const CalendarContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
-    firebase
-      .database()
-      .ref("calendar")
-      .once("value")
-      .then((snapshot) => {
-        let values = [];
-        snapshot.forEach((child) => {
-          values.push(child.val());
+    const ref = firebase.database().ref("calendar/events");
+    ref.once("value").then((snapshot) => {
+      let result = {};
+      snapshot.forEach((daySnapshot) => {
+        result[daySnapshot.key] = [];
+        daySnapshot.forEach((eventSnapshot) => {
+          result[daySnapshot.key].push(eventSnapshot.val());
         });
-        setDate(values);
-        setIsLoading(false);
       });
-  }, []);
+      setDate(result)
+    });
+  }, [true])
 
   return (
     <CalendarContext.Provider
