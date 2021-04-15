@@ -28,24 +28,24 @@ export const CalendarScreen = ({ navigation }) => {
     });
   }, [])
 
-  const renderItem = (item) => {
+  const renderItem = (date) => {
     return (
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("CalendarDetail", {
-            calendar: item,
+            calendar: date,
           })
         }
       >
         <EventCard>
           <Text>
-            {item.starttime} - {item.endtime}
+            {date.starttime} - {date.endtime}
           </Text>
           <Spacer size="medium">
-            <Text>{item.name}</Text>
+            <Text>{date.name}</Text>
           </Spacer>
           <Spacer size="medium">
-            <Text>{item.eventName}</Text>
+            <Text>{date.eventName}</Text>
           </Spacer>
         </EventCard>
       </TouchableOpacity>
