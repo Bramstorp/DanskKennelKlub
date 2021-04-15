@@ -8,9 +8,6 @@ import { Agenda } from "react-native-calendars";
 import { Text } from "../../../components/typography/text.component";
 import { CalendarContext } from "../../../services/calendar/calendar.context";
 
-import * as firebase from "firebase";
-import { useEffect } from "react";
-
 export const CalendarScreen = ({ navigation }) => {
   const { date } = useContext(CalendarContext)
 
