@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Text } from "react-native";
+import { Modal, StyleSheet, Text, View } from "react-native";
+
 import { DetaiContainer, DetailEventCard } from "../components/calendar-style";
 import { Button, Appbar } from "react-native-paper";
 
@@ -14,6 +15,8 @@ export const CalendarDetailScreen = ({ route, navigation }) => {
   const { calendar } = route.params;
   const { removeEvent } = useContext(EventsContext);
   const { user } = useContext(AuthenticationContext);
+  const [modalVisible, setModalVisible] = useState(false);
+
 
   return (
     <SafeArea>
@@ -45,12 +48,76 @@ export const CalendarDetailScreen = ({ route, navigation }) => {
           <Button
             mode="contained"
             color={colors.brand.primary}
-            onPress={() => removeEvent(calendar)}
+            onPress={() => setModalVisible(true)}
           >
             Fjern Event
           </Button>
         </Spacer>
       </DetaiContainer>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>
+              Er du sikker på du vil fjerne denne event?
+            </Text>
+            <Button
+              mode="contained"
+              color={colors.brand.primary}
+              onPress={() => {
+                removeEvent(calendar);
+                setModalVisible(!modalVisible);
+              }}
+              
+            >
+              Fjern Event
+            </Button>
+            <Spacer size="medium">
+              <Button
+                mode="contained"
+                color={colors.brand.primary}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                Luk
+              </Button>
+            </Spacer>
+          </View>
+        </View>
+      </Modal>
     </SafeArea>
   );
 };
+
+const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 80,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  }
+});
