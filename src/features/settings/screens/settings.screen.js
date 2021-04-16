@@ -47,7 +47,7 @@ export const SettingsScreen = ({ navigation }) => {
         </Spacer>
       </AvatarContainer>
       <SettingsEventsCards
-        key={events.key}
+        key={events.eventName}
         events={events}
         navigation={navigation}
       />

@@ -13,7 +13,7 @@ import { colors } from "../../../infrastructure/theme/colors";
 
 export const CalendarDetailScreen = ({ route, navigation }) => {
   const { calendar } = route.params;
-  const { removeEvent } = useContext(EventsContext);
+  const { removeEvent, joinEvents } = useContext(EventsContext);
   const { user } = useContext(AuthenticationContext);
   const [modalVisible, setModalVisible] = useState(false);
 
