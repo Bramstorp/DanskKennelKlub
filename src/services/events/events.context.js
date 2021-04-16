@@ -72,9 +72,7 @@ export const EventsContextProvider = ({ children }) => {
       .orderByChild("eventName")
       .equalTo(events.eventName)
       .on("value", function (snapshot) {
-        snapshot.forEach(function (data) {
-          data.ref.remove()
-        });
+        snapshot.ref.remove()
       });
   };
 

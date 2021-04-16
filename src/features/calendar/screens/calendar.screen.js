@@ -1,5 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { TouchableOpacity } from "react-native";
+import { useFocusEffect } from '@react-navigation/native';
 
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
@@ -8,8 +9,28 @@ import { Agenda } from "react-native-calendars";
 import { Text } from "../../../components/typography/text.component";
 import { CalendarContext } from "../../../services/calendar/calendar.context";
 
+import * as firebase from "firebase";
+
 export const CalendarScreen = ({ navigation }) => {
-  const { date } = useContext(CalendarContext)
+  const [date, setDate] = useState([]);
+
+  console.log(date)
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const ref = firebase.database().ref("calendar/events");
+      ref.once("value").then((snapshot) => {
+        let result = {};
+        snapshot.forEach((daySnapshot) => {
+          result[daySnapshot.key] = [];
+          daySnapshot.forEach((eventSnapshot) => {
+            result[daySnapshot.key].push(eventSnapshot.val());
+          });
+        });
+        setDate(result)
+      });
+    }, [date.date])
+  );
 
   const renderItem = (date) => {
     return (
