@@ -49,7 +49,6 @@ export const EventsContextProvider = ({ children }) => {
 
     const ref = firebase.database().ref(`users/${user.uid}/`)
     ref.push(user_data)
-
   };
 
   const removeEventFromUser = (user, events) => {

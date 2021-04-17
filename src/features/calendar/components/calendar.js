@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 
 import { Agenda } from "react-native-calendars";
 
@@ -47,6 +47,7 @@ export const Calendar = ({ date, navigation }) => {
       </EmptyDate>
     );
   };
+
 
   return (
     <Agenda
