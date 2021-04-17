@@ -1,5 +1,5 @@
-import React from "react";
-import { TouchableOpacity, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { TouchableOpacity } from "react-native";
 
 import { Agenda } from "react-native-calendars";
 
