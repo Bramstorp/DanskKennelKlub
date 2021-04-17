@@ -1,4 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useCallback } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+
 import { SafeAreaView, Image } from "react-native";
 import { List } from "react-native-paper";
 import { Text } from "../../../components/typography/text.component";
@@ -16,19 +18,21 @@ export const SettingsScreen = ({ navigation }) => {
   const { onLogout, user } = useContext(AuthenticationContext);
   const [events, setEvents] = useState([]);
 
-  useEffect(() => {
-    firebase
-      .database()
-      .ref(`users/${user.uid}`)
-      .once("value")
-      .then((snapshot) => {
-        const values = [];
-        snapshot.forEach((child) => {
-          values.push(child.val());
+  useFocusEffect(
+    useCallback(() => {
+      firebase
+        .database()
+        .ref(`users/${user.uid}`)
+        .once("value")
+        .then((snapshot) => {
+          const values = [];
+          snapshot.forEach((child) => {
+            values.push(child.val());
+          });
+          setEvents(values);
         });
-        setEvents(values);
-      });
-  }, []);
+    }, [events.date])
+  )
 
   return (
     <SafeAreaView>
@@ -47,7 +51,7 @@ export const SettingsScreen = ({ navigation }) => {
         </Spacer>
       </AvatarContainer>
       <SettingsEventsCards
-        key={events.eventName}
+        key={events.date}
         events={events}
         navigation={navigation}
       />

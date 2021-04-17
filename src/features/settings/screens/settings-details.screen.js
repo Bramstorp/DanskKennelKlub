@@ -48,15 +48,6 @@ export const SettingsDetailScreen = ({ route, navigation }) => {
         >
           Fjern Event
         </Button>
-        <Spacer size="medium">
-          <Button
-            mode="contained"
-            color={colors.brand.primary}
-            onPress={() => setModalVisible(!modalVisible)}
-          >
-            Luk
-          </Button>
-        </Spacer>
       </DetaiContainer>
       <Modal
         animationType="slide"
