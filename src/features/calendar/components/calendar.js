@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { TouchableOpacity, View } from "react-native";
+import React, { useState, useCallback } from "react";
+import { TouchableOpacity } from "react-native";
+import { ActivityIndicator, Colors } from "react-native-paper";
+import { useFocusEffect } from "@react-navigation/native";
 
 import { Agenda } from "react-native-calendars";
 
@@ -7,16 +9,40 @@ import { Text } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { EventCard, EmptyDate } from "../components/calendar-style";
 
-export const Calendar = ({ date, navigation }) => {
+import * as firebase from "firebase";
+
+export const Calendar = ({ navigation }) => {
+  const [date, setDate] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      setLoading(true)
+      const ref = firebase.database().ref("calendar/events");
+      ref.once("value").then((snapshot) => {
+        let result = {};
+        snapshot.forEach((daySnapshot) => {
+          result[daySnapshot.key] = [];
+          daySnapshot.forEach((eventSnapshot) => {
+            result[daySnapshot.key].push(eventSnapshot.val());
+          });
+        });
+        setDate(result);
+        setLoading(false);
+      });
+    }, [date.date])
+  );
+
   const renderItem = (date) => {
     return (
-      <TouchableOpacity
+        <TouchableOpacity
         onPress={() =>
           navigation.navigate("CalendarDetail", {
             calendar: date,
           })
         }
       >
+        {!loading ? (
         <EventCard>
           <Text>
             {date.starttime} - {date.endtime}
@@ -28,8 +54,12 @@ export const Calendar = ({ date, navigation }) => {
             <Text>{date.eventName}</Text>
           </Spacer>
         </EventCard>
+      
+      ) : (
+        <ActivityIndicator animating={true} color={Colors.blue300} />
+      )}
       </TouchableOpacity>
-    );
+    )
   };
 
   const emptyDate = () => {
