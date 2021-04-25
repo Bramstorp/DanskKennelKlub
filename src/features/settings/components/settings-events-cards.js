@@ -1,10 +1,12 @@
 import React from "react";
+import { ActivityIndicator, Colors } from "react-native-paper";
+import { TouchableOpacity, View } from "react-native";
+
 import { Text } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
-import { TouchableOpacity, View } from "react-native";
-import { DetailEventCard } from "./settings-events-styles";
+import { DetailEventCard, Loading } from "./settings-events-styles";
 
-export const SettingsEventsCards = ({ events, navigation }) => {
+export const SettingsEventsCards = ({ events, loading, navigation }) => {
   if (!events.length) {
     return null;
   }
@@ -17,17 +19,23 @@ export const SettingsEventsCards = ({ events, navigation }) => {
           })
         }
       >
-        <DetailEventCard>
-          <Text>
-            {event.starttime} - {event.endtime}
-          </Text>
-          <Spacer size="medium">
-            <Text>{event.name}</Text>
-          </Spacer>
-          <Spacer size="medium">
-            <Text>{event.eventName}</Text>
-          </Spacer>
-        </DetailEventCard>
+        {!loading ? (
+          <DetailEventCard>
+            <Text>
+              {event.starttime} - {event.endtime}
+            </Text>
+            <Spacer size="medium">
+              <Text>{event.name}</Text>
+            </Spacer>
+            <Spacer size="medium">
+              <Text>{event.eventName}</Text>
+            </Spacer>
+          </DetailEventCard>
+        ) : (
+          <Loading>
+            <ActivityIndicator animating={true} color={Colors.blue300} />
+          </Loading>
+        )}
       </TouchableOpacity>
     );
   });

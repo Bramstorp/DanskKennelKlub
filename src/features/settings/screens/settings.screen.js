@@ -17,9 +17,11 @@ import * as firebase from "firebase";
 export const SettingsScreen = ({ navigation }) => {
   const { onLogout, user } = useContext(AuthenticationContext);
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useFocusEffect(
     useCallback(() => {
+      setLoading(true);
       firebase
         .database()
         .ref(`users/${user.uid}`)
@@ -30,6 +32,7 @@ export const SettingsScreen = ({ navigation }) => {
             values.push(child.val());
           });
           setEvents(values);
+          setLoading(false);
         });
     }, [events.date])
   )
@@ -54,6 +57,7 @@ export const SettingsScreen = ({ navigation }) => {
         key={events.date}
         events={events}
         navigation={navigation}
+        loading={loading}
       />
       <List.Section>
         <SettingsItem

@@ -22,6 +22,11 @@ export const DetailEventCard = styled.View`
   padding: 15px;
 `;
 
+export const Loading = styled.View`
+  margin: 15px;
+  padding: 15px;
+`;
+
 export const EmptyDate = styled.View`
   background-color: ${(props) => props.theme.colors.bg.primary};
   justify-content: center;
