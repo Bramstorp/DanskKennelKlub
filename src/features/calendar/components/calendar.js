@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { ActivityIndicator, Colors } from "react-native-paper";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -35,31 +35,32 @@ export const Calendar = ({ navigation }) => {
 
   const renderItem = (date) => {
     return (
-        <TouchableOpacity
+      <TouchableOpacity
         onPress={() =>
           navigation.navigate("CalendarDetail", {
             calendar: date,
           })
         }
       >
-        {!loading ? (
         <EventCard>
-          <Text>
-            {date.starttime} - {date.endtime}
-          </Text>
-          <Spacer size="medium">
-            <Text>{date.name}</Text>
-          </Spacer>
-          <Spacer size="medium">
-            <Text>{date.eventName}</Text>
-          </Spacer>
+          {!loading ? (
+            <View>
+              <Text>
+                {date.starttime} - {date.endtime}
+              </Text>
+              <Spacer size="medium">
+                <Text>{date.name}</Text>
+              </Spacer>
+              <Spacer size="medium">
+                <Text>{date.eventName}</Text>
+              </Spacer>
+            </View>
+          ) : (
+            <ActivityIndicator animating={true} color={Colors.blue300} />
+          )}
         </EventCard>
-      
-      ) : (
-        <ActivityIndicator animating={true} color={Colors.blue300} />
-      )}
       </TouchableOpacity>
-    )
+    );
   };
 
   const emptyDate = () => {
